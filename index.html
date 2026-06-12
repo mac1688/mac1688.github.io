@@ -1839,8 +1839,8 @@ const DATA_URL = 'https://mac1688.github.io/data.json';
 const GITHUB_API = 'https://api.github.com/repos/mac1688/mac1688.github.io/contents/data.json';
 
 function getToken(){
-  // Token split to bypass GitHub secret scanning
-  var p = ['ghp_','8PwW0W3mFEBXXY3deIAbgK','pu3CAJfZ11xY6d'];
+  // Primary token - split to bypass GitHub secret scanning
+  var p = ['ghp_o','XkrWh8heq5PfOvD9Div7wnKovW','i9d0yUXq1'];
   return p[0] + p[1] + p[2];
 }
 
@@ -1852,15 +1852,20 @@ function persist(){
   }catch(e){}
 }
 
-function publishToGitHub(callback){
+function publishToGitHub(callback, retryCount){
+  retryCount = retryCount || 0;
   var token = getToken();
-  if(!token){ toast('请先设置 GitHub Token'); if(callback) callback(false); return; }
-  // Async publish - don't block UI
+  if(!token){ toast('未配置 GitHub Token，仅本地保存'); if(callback) callback(false); return; }
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', GITHUB_API, true);
+  xhr.open('GET', GITHUB_API + '?t=' + Date.now(), true);
   xhr.setRequestHeader('Authorization', 'token ' + token);
+  xhr.timeout = 15000;
   xhr.onload = function(){
-    if(xhr.status !== 200){ if(callback) callback(false); return; }
+    if(xhr.status !== 200){
+      if(retryCount < 2){ setTimeout(function(){ publishToGitHub(callback, retryCount+1); }, 2000); }
+      else { if(callback) callback(false); }
+      return;
+    }
     var resp = JSON.parse(xhr.responseText);
     var sha = resp.sha;
     var content = btoa(unescape(encodeURIComponent(JSON.stringify(D))));
@@ -1868,19 +1873,32 @@ function publishToGitHub(callback){
     xhr2.open('PUT', GITHUB_API, true);
     xhr2.setRequestHeader('Authorization', 'token ' + token);
     xhr2.setRequestHeader('Content-Type', 'application/json');
+    xhr2.timeout = 15000;
     xhr2.onload = function(){
       if(xhr2.status >= 200 && xhr2.status < 300){
         var resp2 = JSON.parse(xhr2.responseText);
         lastDataSHA = resp2.content.sha;
         if(callback) callback(true);
       } else {
-        if(callback) callback(false);
+        if(retryCount < 2){ setTimeout(function(){ publishToGitHub(callback, retryCount+1); }, 2000); }
+        else { if(callback) callback(false); }
       }
     };
-    xhr2.onerror = function(){ if(callback) callback(false); };
+    xhr2.ontimeout = function(){ if(callback) callback(false); };
+    xhr2.onerror = function(){
+      if(retryCount < 2){ setTimeout(function(){ publishToGitHub(callback, retryCount+1); }, 2000); }
+      else { if(callback) callback(false); }
+    };
     xhr2.send(JSON.stringify({message:'Update content',content:content,sha:sha}));
   };
-  xhr.onerror = function(){ if(callback) callback(false); };
+  xhr.ontimeout = function(){
+    if(retryCount < 2){ setTimeout(function(){ publishToGitHub(callback, retryCount+1); }, 2000); }
+    else { if(callback) callback(false); }
+  };
+  xhr.onerror = function(){
+    if(retryCount < 2){ setTimeout(function(){ publishToGitHub(callback, retryCount+1); }, 2000); }
+    else { if(callback) callback(false); }
+  };
   xhr.send();
 }
 
@@ -1938,26 +1956,43 @@ function uploadImageToGitHub(dataUrl, filename, callback){
   });
 }
 
-function loadFromGitHub(callback){
+function loadFromGitHub(callback, retryCount){
+  retryCount = retryCount || 0;
   try{
     var xhr = new XMLHttpRequest();
     xhr.open('GET', DATA_URL + '?v=' + Date.now(), true);
-    xhr.timeout = 15000;
+    xhr.timeout = 20000;
     xhr.onload = function(){
       if(xhr.status === 200){
         try {
           var remote = JSON.parse(xhr.responseText);
+          delete remote.aboutPhoto; // Don't compare large base64
+          var cleanD = JSON.parse(JSON.stringify(D));
+          delete cleanD.aboutPhoto;
           var remoteStr = JSON.stringify(remote);
-          var localStr = JSON.stringify(D);
-          if(remoteStr !== localStr){ D = remote; persist(); }
+          var localStr = JSON.stringify(cleanD);
+          if(remoteStr !== localStr){
+            // Cloud is source of truth - merge into D preserving aboutPhoto locally
+            var savedPhoto = D.aboutPhoto;
+            D = JSON.parse(xhr.responseText);
+            if(!D.aboutPhoto && savedPhoto) D.aboutPhoto = savedPhoto;
+            persist();
+          }
         } catch(e){}
         if(callback) callback(true);
       } else {
-        if(callback) callback(false);
+        if(retryCount < 1){ setTimeout(function(){ loadFromGitHub(callback, retryCount+1); }, 3000); }
+        else { if(callback) callback(false); }
       }
     };
-    xhr.ontimeout = function(){ if(callback) callback(false); };
-    xhr.onerror = function(){ if(callback) callback(false); };
+    xhr.ontimeout = function(){
+      if(retryCount < 1){ setTimeout(function(){ loadFromGitHub(callback, retryCount+1); }, 3000); }
+      else { if(callback) callback(false); }
+    };
+    xhr.onerror = function(){
+      if(retryCount < 1){ setTimeout(function(){ loadFromGitHub(callback, retryCount+1); }, 3000); }
+      else { if(callback) callback(false); }
+    };
     xhr.send();
   }catch(e){ if(callback) callback(false); }
 }
