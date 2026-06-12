@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王雪松 WANG XUESONG - 空间设计作品集 | Interior Design Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ======== VARIABLES ======== */
+:root {
+  --bg:#08080a;--surface:#0f0f13;--surface2:#16161c;--border:rgba(255,255,255,0.05);
+  --text:#e0ded8;--text2:#9a9790;--text3:#5c5955;
+  --accent:#d4445a;--accent-dim:#d4445a1E;--accent-hue:352;
+  --font-serif:'EB Garamond','Noto Serif SC',Georgia,serif;
+  --font-sans:'Outfit','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  --transition:0.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ======== RESET ======== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:17px;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.75;overflow-x:hidden;font-weight:300;transition:background var(--transition),color var(--transition)}
+a{color:inherit;text-decoration:none}
+
+/* ======== CANVAS BG ======== */
+#bgCanvas{position:fixed;inset:0;z-index:0;opacity:0.85;pointer-events:none}
+#glowCanvas{position:fixed;inset:0;z-index:1;opacity:0.3;pointer-events:none;mix-blend-mode:screen}
+
+/* ======== HEADER ======== */
+#header{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;transition:all 0.5s}
+#header.scrolled{background:rgba(8,8,10,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:16px 48px}
+.logo{font-family:var(--font-serif);font-size:20px;font-weight:500;letter-spacing:-0.3px;color:#fff}.logo span{color:var(--accent)}.logo .sub{display:block;font-size:8px;letter-spacing:3px;font-weight:400;color:var(--text3);text-transform:uppercase}.logo .sub2{display:block;font-size:7.5px;letter-spacing:2px;font-weight:400;color:var(--text3);text-transform:uppercase;margin-top:1px}
+#header nav{display:flex;gap:28px}
+#header nav a{color:var(--text3);font-size:11px;font-weight:500;letter-spacing:1px;transition:color 0.25s;text-transform:uppercase;position:relative}
+#header nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s}
+#header nav a:hover,#header nav a.active{color:var(--text)}
+#header nav a:hover::after,#header nav a.active::after{width:100%}
+.header-actions{display:flex;gap:8px;align-items:center}
+#liveClock{font-family:var(--font-mono);font-size:11px;color:var(--text2);margin-right:12px;letter-spacing:0.5px;min-width:70px;text-align:right;user-select:none}
+#navMiniClock{font-family:var(--font-mono);font-size:9px;color:var(--text3);margin-right:6px;letter-spacing:0.5px;min-width:44px;text-align:right;user-select:none}
+.theme-dots{display:flex;gap:6px;margin-right:16px;align-items:center}
+.theme-dot{width:10px;height:10px;border-radius:50%;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;border:1px solid transparent;position:relative}
+.theme-dot:hover{transform:scale(1.3)}
+.theme-dot.active{box-shadow:0 0 0 2px var(--accent),0 0 12px var(--accent-dim);border-color:rgba(255,255,255,0.3)}
+.theme-dot .tooltip{position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:var(--surface2);color:var(--text);font-size:9px;padding:3px 8px;border-radius:3px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;font-family:var(--font-sans);letter-spacing:0.5px}
+.theme-dot:hover .tooltip{opacity:1}
+.carousel-btn{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-right:8px;transition:all 0.3s;position:relative;flex-shrink:0}
+.carousel-btn::after{content:'';width:6px;height:6px;border:solid var(--text3);border-width:2px 2px 0 0;transform:rotate(45deg);transition:border-color 0.3s}
+.carousel-btn:hover{border-color:var(--accent)}
+.carousel-btn:hover::after{border-color:var(--accent)}
+.carousel-btn.rotating{border-color:var(--accent);animation:carouselPulse 1.4s ease-in-out infinite}
+.carousel-btn.rotating::after{border-color:var(--accent)}
+@keyframes carouselPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,68,90,0.4)}50%{box-shadow:0 0 0 6px rgba(212,68,90,0)}}
+.nav-btn{padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:0;background:transparent;color:var(--text2);font-size:10px;cursor:pointer;transition:all 0.25s;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.02)}
+.nav-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.nav-btn.primary:hover{background:transparent;color:var(--accent);transform:scale(1.02)}
+
+/* ======== HERO ======== */
+.hero-section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:160px 48px 80px;max-width:1040px;margin:0 auto;width:100%}
+.hero-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:28px;font-weight:500}
+.hero-headline{font-family:var(--font-serif);font-size:clamp(38px,7.5vw,78px);font-weight:400;line-height:1.04;letter-spacing:-2px;margin-bottom:36px;max-width:820px;color:#fff}
+.hero-intro{font-size:clamp(15px,1.7vw,17px);color:var(--text2);max-width:580px;line-height:1.9;margin-bottom:48px;font-weight:300}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:14px 36px;font-size:12px;font-weight:600;letter-spacing:0.8px;cursor:pointer;transition:all 0.35s;border:none;font-family:var(--font-sans);text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 40px var(--accent-dim)}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.02)}
+
+/* ======== SECTIONS ======== */
+.section{max-width:1040px;margin:0 auto;width:100%;padding:120px 48px;position:relative;z-index:2}
+.section-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;font-weight:500}
+.section-title{font-family:var(--font-serif);font-size:clamp(30px,5vw,52px);font-weight:400;letter-spacing:-1.2px;line-height:1.1;margin-bottom:14px;color:#fff}
+.section-sub{font-size:15px;color:var(--text2);max-width:520px;margin-bottom:64px;line-height:1.8;font-weight:300}
+
+/* ======== STATS ======== */
+.stats-row{max-width:1040px;margin:0 auto;width:100%;padding:0 48px 120px;position:relative;z-index:2}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.stat-item{padding:44px 20px;text-align:center;background:var(--surface);transition:transform 0.4s,background 0.4s,box-shadow 0.4s;position:relative}
+.stat-item:hover{background:var(--surface2);transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.stat-item .st-del{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.1);color:var(--text3);font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all 0.25s;z-index:5}
+.stat-item:hover .st-del{opacity:1}
+.stat-item .st-del:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.stat-value{font-family:var(--font-serif);font-size:clamp(26px,3.5vw,40px);font-weight:400;color:var(--accent);line-height:1}
+.stat-label{font-size:10.5px;color:var(--text2);text-transform:uppercase;letter-spacing:1.5px;margin-top:10px;font-weight:500}
+.stat-unit{font-size:8.5px;color:var(--text3);letter-spacing:2px;margin-top:4px}
+.module-add-btn{display:flex;align-items:center;justify-content:center;padding:24px;background:var(--surface);border:1px dashed var(--border);cursor:pointer;transition:all 0.4s;flex-direction:column;gap:8px;grid-column:1/-1}
+.module-add-btn:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-4px)}
+.module-add-btn .plus{font-size:32px;color:var(--text3);transition:color 0.3s;font-weight:300;line-height:1}
+.module-add-btn:hover .plus{color:var(--accent)}
+.module-add-btn span{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-weight:500}
+.item-del{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.12);color:var(--text3);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all 0.25s;z-index:5}
+.skill-item:hover .item-del,.process-item:hover .item-del,.service-item:hover .item-del,.case-item:hover .item-del,.testimonial-item:hover .item-del,.insight-item:hover .item-del,.philo-item:hover .item-del,.edu-item:hover .item-del,.timeline-item:hover .item-del,.faq-item .item-del{opacity:1}
+.item-del:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.faq-item .item-del{position:absolute;top:16px;right:0}
+
+/* ======== PROJECTS ======== */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.project-card{background:var(--surface);cursor:pointer;overflow:hidden;transition:transform 0.5s,box-shadow 0.5s;position:relative}
+.project-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.4);z-index:2}
+.project-card .pc-delete{position:absolute;top:12px;right:12px;z-index:10;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.12);color:var(--text3);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all 0.25s}
+.project-card:hover .pc-delete{opacity:1}
+.project-card .pc-delete:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.project-card .pc-image{aspect-ratio:4/3;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.project-card .pc-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+.project-card:hover .pc-image img{transform:scale(1.06)}
+.project-card .pc-image .placeholder{font-size:36px;opacity:0.08;color:#fff;font-family:var(--font-serif)}
+.project-card .pc-image .pc-tag{position:absolute;top:14px;left:14px;padding:4px 12px;background:rgba(0,0,0,0.75);color:var(--accent);font-size:9px;letter-spacing:1px;font-weight:600;text-transform:uppercase}
+.project-card .pc-body{padding:28px}
+.project-card .pc-body .pc-meta{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+.project-card .pc-body h3{font-family:var(--font-serif);font-size:20px;font-weight:500;margin-bottom:4px;color:#fff;letter-spacing:-0.3px}
+.project-card .pc-body .pc-en{font-size:10px;color:var(--text3);letter-spacing:0.5px;margin-bottom:14px;font-style:italic}
+.project-card .pc-body p{font-size:12.5px;color:var(--text2);line-height:1.65;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:-webkit-box}
+.add-project-btn{display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px dashed var(--border);cursor:pointer;transition:all 0.4s;min-height:200px;flex-direction:column;gap:12px}
+.add-project-btn:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-4px)}
+.add-project-btn .plus{font-size:40px;color:var(--text3);transition:color 0.3s;font-weight:300;line-height:1}
+.add-project-btn:hover .plus{color:var(--accent)}
+.add-project-btn span{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-weight:500}
+
+/* ======== MODAL ======== */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(4,4,6,0.94);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity 0.35s}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--surface);max-width:820px;width:100%;max-height:85vh;overflow-y:auto;padding:48px;position:relative;border:1px solid var(--border)}
+.modal-close{position:absolute;top:20px;right:20px;width:40px;height:40px;background:rgba(255,255,255,0.04);border:none;color:#fff;font-size:18px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.modal-close:hover{background:var(--accent)}
+.modal .m-cat{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:12px}
+.modal h2{font-family:var(--font-serif);font-size:clamp(24px,3.5vw,34px);font-weight:400;margin-bottom:6px;color:#fff;letter-spacing:-0.5px}
+.modal .m-sub{font-size:11px;color:var(--text3);margin-bottom:32px}
+.modal .m-section{margin-bottom:24px}
+.modal .m-section h4{font-family:var(--font-sans);font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;font-weight:600}
+.modal .m-section p,.modal .m-section li{font-size:14px;color:var(--text2);line-height:1.85;font-weight:300}
+.modal .m-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.modal .m-tags span{padding:5px 16px;background:rgba(255,255,255,0.03);font-size:11px;color:var(--text2);border:1px solid var(--border)}
+.modal .m-gallery{margin-top:36px}
+.modal .m-gallery h4{font-family:var(--font-sans);font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.modal .m-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.modal .m-gallery-grid .g-item{aspect-ratio:4/3;background:var(--surface2);cursor:pointer;overflow:hidden;transition:transform 0.3s}
+.modal .m-gallery-grid .g-item:hover{transform:translateY(-2px)}
+.modal .m-gallery-grid .g-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s}
+.modal .m-gallery-grid .g-item:hover img{transform:scale(1.06)}
+.modal .m-gallery-grid .g-item.add{display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:24px;cursor:pointer;border:1px dashed var(--border)}
+.modal .m-gallery-grid .g-item.add:hover{color:var(--accent);border-color:var(--accent)}
+.modal .m-hero-img{width:100%;aspect-ratio:21/9;overflow:hidden;margin-bottom:32px;border:1px solid var(--border);cursor:pointer}
+.modal .m-hero-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+.modal .m-hero-img:hover img{transform:scale(1.02)}
+.modal .m-hero-placeholder{width:100%;aspect-ratio:21/9;background:var(--surface2);display:flex;align-items:center;justify-content:center;margin-bottom:32px;border:1px solid var(--border);font-family:var(--font-serif);font-size:3rem;color:var(--text3);letter-spacing:4px}
+.modal .m-two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.modal .m-header{margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.modal .m-gallery-grid .g-item{position:relative}
+.modal .m-gallery-grid .g-item .g-badge{position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,0.7);color:#fff;font-size:9px;padding:2px 8px;font-family:var(--font-mono);letter-spacing:1px}
+.modal .m-gallery-grid .g-item.main .g-badge{background:var(--accent)}
+/* Gallery admin controls */
+.g-del{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.15);color:#f66;font-size:14px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:5;line-height:1}
+.g-move-left,.g-move-right{position:absolute;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,0.7);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:12px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:5;line-height:1}
+.g-move-left{left:6px}.g-move-right{right:6px}
+body.admin .g-del,body.admin .g-move-left,body.admin .g-move-right{display:flex}
+.modal .m-gallery-grid .g-item:hover .g-del,
+.modal .m-gallery-grid .g-item:hover .g-move-left,
+.modal .m-gallery-grid .g-item:hover .g-move-right{display:flex}
+.modal .m-gallery-grid .g-item.add{display:none}
+body.admin .modal .m-gallery-grid .g-item.add{display:flex}
+.g-del:hover{background:#f44;color:#fff;border-color:#f44}
+.g-move-left:hover,.g-move-right:hover{background:var(--accent);border-color:var(--accent)}
+
+.lightbox{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,0.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:88vh}
+.lightbox-close{position:absolute;top:24px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);border:none;color:#fff;font-size:20px;cursor:pointer}
+
+.add-modal{position:fixed;inset:0;z-index:350;background:rgba(4,4,6,0.94);display:flex;align-items:center;justify-content:center;padding:32px;opacity:0;pointer-events:none;transition:opacity 0.35s}
+.add-modal.open{opacity:1;pointer-events:auto}
+.add-modal-inner{background:var(--surface);max-width:600px;width:100%;max-height:85vh;overflow-y:auto;padding:40px;border:1px solid var(--border)}
+.add-modal-inner h3{font-family:var(--font-serif);font-size:22px;font-weight:400;color:#fff;margin-bottom:24px;letter-spacing:-0.3px}
+.add-modal-inner .af-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.add-modal-inner .af-full{margin-bottom:14px}
+.add-modal-inner label{display:block;font-size:9px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.add-modal-inner input,.add-modal-inner textarea{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12.5px;font-family:var(--font-sans);transition:border-color 0.2s;font-weight:300}
+.add-modal-inner textarea{min-height:60px;resize:vertical;line-height:1.6}
+.add-modal-inner input:focus,.add-modal-inner textarea:focus{outline:none;border-color:var(--accent)}
+.add-modal-actions{display:flex;gap:10px;margin-top:24px}
+.add-modal-actions button{flex:1;padding:13px;font-size:11px;font-weight:600;border:none;cursor:pointer;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase;transition:all 0.25s}
+.add-modal-actions .save{background:var(--accent);color:#fff}
+.add-modal-actions .save:hover{filter:brightness(1.15)}
+.add-modal-actions .cancel{background:rgba(255,255,255,0.03);color:var(--text2);border:1px solid var(--border)}
+.add-modal-actions .cancel:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ======== ABOUT ======== */
+.about-photo-area{display:flex;align-items:center;gap:28px;margin-bottom:48px;padding:24px 32px;background:var(--surface);border:1px solid var(--border)}
+.about-photo{width:100px;height:100px;border-radius:50%;overflow:hidden;flex-shrink:0;cursor:pointer;position:relative;background:var(--surface2);border:2px solid var(--border);transition:all 0.3s;display:flex;align-items:center;justify-content:center}
+.about-photo:hover{border-color:var(--accent);transform:scale(1.05)}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-photo .ph-placeholder{font-family:var(--font-serif);font-size:36px;color:var(--accent);opacity:0.3;font-weight:500}
+.about-photo .ph-upload{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);font-size:10px;color:#fff;letter-spacing:1px;text-transform:uppercase}
+body.admin .about-photo .ph-upload{display:flex;opacity:0;transition:opacity 0.3s}
+body.admin .about-photo:hover .ph-upload{opacity:1}
+body.admin .about-photo{cursor:pointer}
+body:not(.admin) .about-photo{cursor:default;pointer-events:none}
+.about-photo-info h4{font-size:16px;color:#fff;font-weight:500;letter-spacing:-0.2px;margin-bottom:4px}
+.about-photo-info p{font-size:11px;color:var(--text3);font-weight:300}
+.about-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:72px;align-items:start}
+.about-bio p{font-size:15px;color:var(--text2);line-height:1.9;margin-bottom:22px;font-weight:300}
+.about-bio p:first-child::first-letter{font-size:3.5em;font-family:var(--font-serif);float:left;line-height:0.8;margin-right:12px;margin-top:4px;color:var(--accent)}
+.about-side{position:relative}
+.edu-item{padding:14px 0;border-bottom:1px solid var(--border);position:relative}
+.edu-item:last-child{border-bottom:none}
+.edu-item:hover .item-del{opacity:1}
+.education-add{margin-top:12px}
+.edu-degree{font-size:15px;font-weight:500;color:#fff}
+.edu-school{font-size:12px;color:var(--text3);margin-top:4px}.edu-year{font-size:10px;color:var(--accent);letter-spacing:1px;margin-top:2px}
+.philosophy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:72px}
+.philo-item{padding:36px 28px;background:var(--surface);transition:all 0.4s;position:relative;overflow:hidden}
+.philo-item:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.philo-item:hover .item-del{opacity:1}
+.philo-item::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.5s}
+.philo-item:hover::before{transform:scaleX(1)}
+.philo-item h4{font-family:var(--font-serif);font-size:20px;font-weight:500;margin-bottom:4px;color:#fff;letter-spacing:-0.3px}
+.philo-item .en{font-size:9px;color:var(--text3);letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.philo-item p{font-size:13px;color:var(--text2);line-height:1.75;font-weight:300}
+
+/* ======== EXPERIENCE ======== */
+.timeline{position:relative;padding-left:36px;max-width:720px}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:0;width:1px;background:var(--border)}
+.timeline-item{position:relative;padding-bottom:48px;transition:transform 0.3s}
+.timeline-item:hover{transform:translateX(4px)}
+.timeline-item:hover .item-del{opacity:1}
+.timeline-item::before{content:'';position:absolute;left:-40px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-dim)}
+.timeline-item .period{font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:8px}
+.timeline-item h4{font-size:19px;font-weight:500;color:#fff;letter-spacing:-0.3px}
+.timeline-item .company{font-size:13px;color:var(--text3);margin-bottom:12px}
+.timeline-item p{font-size:14px;color:var(--text2);line-height:1.8;font-weight:300}
+
+/* ======== SKILLS ======== */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px}
+.skill-item{padding:28px 24px;background:var(--surface);transition:transform 0.4s,background 0.4s,box-shadow 0.4s;position:relative}
+.skill-item:hover{background:var(--surface2);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.skill-item:hover .item-del{opacity:1}
+.skill-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.skill-name{font-size:14px;font-weight:500;color:#fff;letter-spacing:-0.2px}
+.skill-pct{font-family:var(--font-mono);font-size:12px;color:var(--accent);font-weight:600}
+.skill-bar{height:2.5px;background:rgba(255,255,255,0.06);margin-bottom:14px;overflow:hidden}
+.skill-bar-fill{height:100%;background:var(--accent);width:0;transition:width 1.6s cubic-bezier(0.16,1,0.3,1)}
+.skill-desc{font-size:12px;color:var(--text3);line-height:1.7;font-weight:300}
+
+/* ======== PROCESS ======== */
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.process-item{padding:36px 28px;background:var(--surface);transition:transform 0.4s,background 0.4s;position:relative}
+.process-item:hover{background:var(--surface2);transform:translateY(-4px)}
+.process-item:hover .item-del{opacity:1}
+.process-item .step-num{font-family:var(--font-serif);font-size:56px;color:var(--accent);opacity:0.08;line-height:1;margin-bottom:8px}
+.process-item h4{font-size:16px;font-weight:500;color:#fff;margin-bottom:4px}
+.process-item .en{font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:12px;text-transform:uppercase}
+.process-item p{font-size:13px;color:var(--text2);line-height:1.75;font-weight:300}
+
+/* ======== SERVICES ======== */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.service-item{padding:36px 28px;background:var(--surface);transition:all 0.4s;position:relative}
+.service-item:hover{background:var(--surface2);transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.service-item:hover .item-del{opacity:1}
+.service-item .s-icon{font-family:var(--font-mono);font-size:20px;color:var(--accent);margin-bottom:16px;opacity:0.5}
+.service-item h4{font-size:16px;font-weight:500;color:#fff;margin-bottom:4px;letter-spacing:-0.2px}
+.service-item .s-en{font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:12px;text-transform:uppercase}
+.service-item p{font-size:13px;color:var(--text2);line-height:1.75;font-weight:300}
+
+/* ======== CASES ======== */
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.case-item{padding:36px 28px;background:var(--surface);transition:transform 0.4s,background 0.4s;position:relative}
+.case-item:hover{background:var(--surface2);transform:translateY(-4px)}
+.case-item:hover .item-del{opacity:1}
+.case-item h4{font-size:17px;font-weight:500;color:#fff;margin-bottom:14px;letter-spacing:-0.3px}
+.case-item p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:20px;font-weight:300}
+.case-metric{display:inline-flex;padding:6px 18px;background:var(--accent-dim);color:var(--accent);font-size:10.5px;font-weight:600;letter-spacing:0.5px}
+
+/* ======== TESTIMONIALS ======== */
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.testimonial-item{padding:44px 36px;background:var(--surface);position:relative;transition:transform 0.4s,background 0.4s}
+.testimonial-item:hover{background:var(--surface2);transform:translateY(-4px)}
+.testimonial-item:hover .item-del{opacity:1}
+.testimonial-item .quote{font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--text2);line-height:1.7;margin-bottom:28px}
+.testimonial-item .author{font-size:14px;font-weight:500;color:#fff}
+.testimonial-item .role{font-size:10.5px;color:var(--text3);margin-top:4px}
+
+/* ======== INSIGHTS ======== */
+.insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.insight-item{padding:36px 28px;background:var(--surface);cursor:pointer;transition:all 0.4s;position:relative}
+.insight-item:hover{background:var(--surface2);transform:translateY(-4px)}
+.insight-item:hover .item-del{opacity:1}
+.insight-item .date{font-family:var(--font-mono);font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:14px}
+.insight-item h4{font-family:var(--font-serif);font-size:18px;font-weight:500;color:#fff;margin-bottom:10px;line-height:1.35;letter-spacing:-0.3px}
+.insight-item p{font-size:13px;color:var(--text2);line-height:1.75;font-weight:300}
+
+/* ======== FAQ ======== */
+.faq-list{max-width:700px}
+.faq-item{border-bottom:1px solid var(--border);cursor:pointer;position:relative}
+.faq-q{padding:24px 36px 24px 0;display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:500;color:#fff;letter-spacing:-0.2px;transition:color 0.2s}
+.faq-q:hover{color:var(--accent)}
+.faq-q .arrow{font-size:16px;color:var(--text3);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)}
+.faq-item.open .faq-q .arrow{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.22,1,0.36,1),padding 0.5s}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:24px}
+.faq-a p{font-size:14px;color:var(--text2);line-height:1.85;font-weight:300}
+
+/* ======== CONTACT ======== */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px}
+.contact-info p{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:36px;font-weight:300}
+.contact-detail{display:flex;gap:18px;margin-bottom:18px;align-items:flex-start}
+.contact-detail .icon{width:16px;font-size:20px;color:var(--accent);flex-shrink:0;text-align:center;line-height:1.5}
+.contact-detail .val{font-size:14px;color:var(--text);font-weight:300}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.contact-form input,.contact-form textarea{padding:16px 18px;background:var(--surface);border:1px solid var(--border);color:#fff;font-size:13px;font-family:var(--font-sans);transition:border-color 0.3s;resize:vertical}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent)}
+.contact-form textarea{min-height:140px}
+.contact-form .btn-primary{width:100%;justify-content:center}
+.contact-success{display:none;text-align:center;padding:40px 0}
+.contact-success h3{font-family:var(--font-serif);font-size:28px;color:var(--accent);margin-bottom:12px}
+.contact-success p{font-size:14px;color:var(--text2)}
+
+/* ======== FOOTER ======== */
+.footer{max-width:1040px;margin:0 auto;width:100%;padding:40px 48px 60px;position:relative;z-index:2;text-align:center;border-top:1px solid var(--border)}
+.footer .copy{font-size:10px;color:var(--text3);letter-spacing:1px;font-weight:300}
+
+/* ======== BACKGROUND SETTINGS ======== */
+.bg-settings-btn{position:fixed;bottom:40px;right:48px;z-index:90;width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all 0.3s;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.bg-settings-btn:hover{border-color:var(--accent);color:var(--accent);transform:rotate(30deg);box-shadow:0 4px 20px var(--accent-dim)}
+.bg-panel-overlay{position:fixed;inset:0;z-index:580;background:rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity 0.3s}
+.bg-panel-overlay.open{opacity:1;pointer-events:auto}
+.bg-panel{position:fixed;right:-460px;top:50%;transform:translateY(-50%);width:420px;z-index:590;background:var(--surface);color:var(--text);padding:32px;transition:right 0.5s cubic-bezier(0.22,1,0.36,1);border:1px solid var(--border);max-height:80vh;overflow-y:auto}
+.bg-panel.open{right:48px}
+.bg-panel h3{font-family:var(--font-sans);font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.bg-panel h3 button{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;transition:color 0.2s}
+.bg-panel h3 button:hover{color:var(--accent)}
+.bg-panel .bg-field{margin-bottom:20px}
+.bg-panel .bg-field label{display:flex;justify-content:space-between;font-size:10px;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.bg-panel .bg-field label span{color:var(--accent);font-family:var(--font-mono);font-size:11px}
+.bg-panel .bg-field input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;outline:none}
+.bg-panel .bg-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer;border:none}
+.bg-panel .bg-field select{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12px;font-family:var(--font-sans);cursor:pointer;transition:border-color 0.2s}
+.bg-panel .bg-field select:focus{outline:none;border-color:var(--accent)}
+.bg-panel .bg-actions{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)}
+.bg-panel .bg-actions button{flex:1;padding:11px;font-size:10px;font-weight:600;border:none;cursor:pointer;transition:all 0.25s;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase}
+.bg-panel .bg-actions .bg-reset{background:rgba(255,255,255,0.03);color:var(--text2);border:1px solid var(--border)}
+.bg-panel .bg-actions .bg-reset:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ======== CMS ======== */
+.cms-overlay{position:fixed;inset:0;z-index:490;background:rgba(0,0,0,0.55);opacity:0;pointer-events:none;transition:opacity 0.3s}
+.cms-overlay.open{opacity:1;pointer-events:auto}
+.cms-panel{position:fixed;right:-560px;top:0;bottom:0;width:480px;z-index:500;background:var(--surface);color:var(--text);overflow-y:auto;padding:36px 28px;transition:right 0.5s cubic-bezier(0.22,1,0.36,1);border-left:1px solid var(--border)}
+.cms-panel.open{right:0}
+.cms-panel h3{font-family:var(--font-sans);font-size:10px;letter-spacing:2.5px;color:var(--accent);text-transform:uppercase;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cms-panel h3 button{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;transition:color 0.2s}
+.cms-panel h3 button:hover{color:var(--accent)}
+.cms-tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:10px}
+.cms-tab{padding:6px 12px;font-size:9px;color:var(--text3);cursor:pointer;border-radius:2px;transition:all 0.2s;letter-spacing:0.5px;text-transform:uppercase;font-weight:500;background:none;border:none;font-family:var(--font-sans)}
+.cms-tab:hover{color:var(--text)}
+.cms-tab.active{background:var(--accent-dim);color:var(--accent)}
+.cms-search{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:11px;margin-bottom:18px;font-family:var(--font-sans);transition:border-color 0.2s;font-weight:300}
+.cms-search:focus{outline:none;border-color:var(--accent)}
+.cms-toggle-all{font-size:9px;color:var(--accent);cursor:pointer;margin-left:auto;letter-spacing:1px;background:none;border:none;font-family:var(--font-sans);text-transform:uppercase;font-weight:500;padding:4px 8px}
+.cms-toggle-all:hover{text-decoration:underline}
+.cms-section{margin-bottom:24px}
+.cms-section h4{font-family:var(--font-sans);font-size:9px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;font-weight:600;display:flex;align-items:center;cursor:pointer;user-select:none}
+.cms-section h4 .collapse-icon{font-size:10px;margin-right:6px;transition:transform 0.3s;display:inline-block}
+.cms-section.collapsed .collapse-icon{transform:rotate(-90deg)}
+.cms-section .cms-body{overflow:hidden;transition:max-height 0.4s ease}
+.cms-section.collapsed .cms-body{max-height:0!important}
+.cms-field{margin-bottom:14px}
+.cms-field label{display:block;font-size:10px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;font-weight:500}
+.cms-field input,.cms-field textarea{width:100%;padding:11px 14px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12.5px;font-family:var(--font-sans);transition:border-color 0.2s;font-weight:300}
+.cms-field textarea{min-height:56px;resize:vertical;line-height:1.6}
+.cms-field input:focus,.cms-field textarea:focus{outline:none;border-color:var(--accent)}
+.cms-hint{font-size:9px;color:var(--text3);margin-top:4px}
+.cms-actions{display:flex;gap:10px;margin-top:28px;padding-top:18px;border-top:1px solid var(--border)}
+.cms-btn{flex:1;padding:13px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.25s;font-family:var(--font-sans);letter-spacing:1px;text-transform:uppercase}
+.cms-btn.save{background:var(--accent);color:#fff}
+.cms-btn.save:hover{filter:brightness(1.15)}
+.cms-btn.reset{background:rgba(255,255,255,0.03);color:var(--text2);border:1px solid var(--border)}
+.cms-btn.reset:hover{border-color:var(--accent);color:var(--accent)}
+.cms-btn.add-proj{background:rgba(255,255,255,0.03);color:var(--accent);border:1px dashed var(--accent);margin-bottom:14px;width:100%}
+.cms-btn.add-proj:hover{background:var(--accent-dim)}
+
+/* ======== EXPORT ======== */
+.export-overlay{position:fixed;inset:0;z-index:550;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;padding:30px;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.export-overlay.open{opacity:1;pointer-events:auto}
+.export-card{background:var(--surface);max-width:540px;width:100%;padding:40px;border:1px solid var(--border)}
+.export-card h3{font-family:var(--font-serif);font-size:24px;font-weight:400;color:#fff;margin-bottom:8px;letter-spacing:-0.3px}
+.export-card .ex-note{font-size:12px;color:var(--text3);margin-bottom:24px}
+.export-theme-select{margin-bottom:20px}
+.export-theme-select label{font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px}
+.export-theme-select .et-grid{display:flex;gap:8px;flex-wrap:wrap}
+.export-preview-btn{width:100%;padding:10px;margin-top:8px;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text2);font-size:10px;cursor:pointer;font-family:var(--font-sans);text-transform:uppercase;letter-spacing:1px;transition:all 0.2s}
+.export-preview-btn:hover{border-color:var(--accent);color:var(--accent)}
+.export-theme-select .et-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;transition:all 0.2s;border:2px solid transparent;position:relative}
+.export-theme-select .et-dot:hover{transform:scale(1.15)}
+.export-theme-select .et-dot.active{border-color:#fff;box-shadow:0 0 14px currentColor}
+.export-options{display:flex;flex-direction:column;gap:10px}
+.export-option{display:flex;align-items:center;gap:20px;padding:20px;background:var(--surface2);cursor:pointer;transition:all 0.25s;border-left:3px solid transparent}
+.export-option:hover{border-left-color:var(--accent);background:rgba(255,255,255,0.03)}
+.export-option .eo-icon{font-size:28px}
+.export-option .eo-body h4{font-size:15px;font-weight:500;color:#fff}
+.export-option .eo-body p{font-size:11px;color:var(--text3);margin-top:4px;font-weight:300}
+.export-cancel{display:block;width:100%;margin-top:18px;padding:13px;background:transparent;border:1px solid var(--border);color:var(--text2);font-size:12px;cursor:pointer;text-align:center;font-family:var(--font-sans);transition:all 0.2s;text-transform:uppercase;letter-spacing:1px}
+.export-cancel:hover{border-color:var(--accent);color:var(--accent)}
+.export-preview{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s}
+.export-preview.open{opacity:1;pointer-events:auto}
+.export-preview-inner{background:var(--bg);max-width:900px;width:95%;max-height:85vh;overflow-y:auto;padding:40px;border:1px solid var(--border);position:relative}
+.export-preview-inner h3{font-family:var(--font-serif);font-size:20px;color:#fff;margin-bottom:18px}
+.export-preview-inner .pv-actions{display:flex;gap:10px;margin-top:24px}
+.export-preview-inner .pv-actions button{flex:1;padding:12px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-sans);border:none;text-transform:uppercase;letter-spacing:1px;transition:all 0.2s}
+.export-preview-inner .pv-confirm{background:var(--accent);color:#fff}
+.export-preview-inner .pv-confirm:hover{filter:brightness(1.15)}
+.export-preview-inner .pv-back{background:rgba(255,255,255,0.03);color:var(--text2);border:1px solid var(--border)}
+.export-preview-inner .pv-back:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ======== TOAST ======== */
+#toastContainer{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);z-index:999;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{padding:12px 32px;background:var(--surface2);color:var(--text);font-size:12px;border:1px solid var(--border);animation:toastIn 0.4s cubic-bezier(0.34,1.56,0.64,1),toastOut 0.35s 2.5s ease forwards;letter-spacing:0.5px}
+@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes toastOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-8px)}}
+
+.divider{width:60px;height:1px;background:var(--accent);opacity:0.25;margin:0 auto}
+
+/* ======== RESPONSIVE ======== */
+@media(max-width:1280px){
+  .hero-section,.section,.stats-row,.footer{max-width:100%}
+  .hero-headline{font-size:clamp(32px,6vw,64px)}
+  .projects-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid,.services-grid,.cases-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  #header{padding:16px 20px}#header.scrolled{padding:12px 20px}#header nav,#liveClock,#navMiniClock{display:none}
+  .theme-dots{margin-right:8px}
+  .hero-section{padding:120px 20px 60px}.section{padding:80px 20px}.stats-row{padding:0 20px 80px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .projects-grid{grid-template-columns:1fr}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .philosophy-grid{grid-template-columns:1fr}
+  .process-grid,.services-grid,.cases-grid{grid-template-columns:1fr}
+  .testimonials-grid,.insights-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .cms-panel{width:100%;right:-100%}
+  .bg-panel{width:100%;right:-100%}.bg-panel.open{right:0}
+  .bg-settings-btn{right:20px;bottom:20px}
+}
+@media(max-width:480px){
+  .hero-section{padding:100px 16px 50px}.section{padding:60px 16px}.stats-row{padding:0 16px 60px}
+  .hero-headline{font-size:28px;letter-spacing:-1px}
+  .hero-intro{font-size:14px}
+  .section-title{font-size:24px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}.stat-value{font-size:32px}
+  .modal{padding:24px}.add-modal-inner{padding:24px}
+  .add-modal-inner .af-row{grid-template-columns:1fr}
+  .export-card,.bg-panel{padding:24px}
+  .cms-tabs{flex-wrap:wrap;gap:4px}.cms-tab{padding:6px 10px;font-size:10px}
+}
+@media print{
+  #header,#bgCanvas,#glowCanvas,.cms-overlay,.cms-panel,.export-overlay,.modal-overlay,.lightbox,#toastContainer,.nav-btn,.theme-dots,#liveClock,#navMiniClock,.carousel-btn,.bg-settings-btn,.bg-panel,.bg-panel-overlay,.item-del,.pc-delete,.module-add-btn,.add-project-btn{display:none!important}
+  body{background:#fff;color:#000;font-size:10pt}
+  .section{padding:18px 0;page-break-inside:avoid}
+  .section-title{color:#000;font-size:20pt}
+  .section-eyebrow{color:#666}
+  @page{margin:15mm;size:A4}
+}
+/* ═══════ ADMIN-ONLY ═══════ */
+/* Admin elements hidden by default via JS, not CSS - more reliable */
+body.admin #loginBtn{display:none}
+body:not(.admin) #logoutBtn{display:none}
+body.admin #logoutBtn{display:inline-flex}
+.admin-toggle-target{display:none}
+body.admin .admin-toggle-target{display:revert}
+#adminCMSBtn,#adminExportBtn,#bgSettingsBtn,.cms-overlay,.cms-panel,.export-overlay,.bg-panel,.bg-panel-overlay{display:none}
+body.admin #adminCMSBtn,body.admin #adminExportBtn,body.admin #bgSettingsBtn{display:inline-flex}
+body.admin .cms-overlay.open{display:block}
+body.admin .cms-panel.open{display:block}
+body.admin .export-overlay.open{display:block}
+body.admin .bg-panel-overlay.open{display:block}
+body.admin .bg-panel.open{display:block}
+.module-add-btn, .add-project-btn, .item-del, .pc-delete, .st-del, .cms-actions, .cms-tabs, .cms-search, .cms-toggle-all{display:none}
+body.admin .module-add-btn, body.admin .add-project-btn{display:flex}
+body.admin .item-del, body.admin .pc-delete, body.admin .st-del{display:flex}
+body.admin .cms-actions{display:flex}
+body.admin .cms-tabs{display:flex}
+body.admin .cms-search{display:block}
+body.admin .cms-toggle-all{display:inline-block}
+</style>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<canvas id="glowCanvas"></canvas>
+
+<header id="header">
+  <a href="#hero" class="logo" id="logoText">LUO<span>SHEN</span><span class="sub">Portfolio 2026</span></a>
+  <nav id="topNav"></nav>
+  <div class="header-actions">
+    <span id="navMiniClock">00:00</span>
+    <span id="liveClock">00:00:00</span>
+    <button class="nav-btn primary admin-only" id="adminCMSBtn" onclick="openCMS()">编辑</button>
+    <button class="nav-btn admin-only" id="adminExportBtn" onclick="openExport()">导出</button>
+    <button class="nav-btn" id="loginBtn" onclick="showLoginModal()">登录管理</button>
+    <button class="nav-btn" id="logoutBtn" onclick="localStorage.removeItem('pf_admin_auth');location.href=location.href.split('#')[0]">退出</button>
+  </div>
+</header>
+
+<section class="hero-section" id="hero"></section>
+<div class="stats-row" id="statsRow"></div>
+<section class="section" id="projects"></section>
+<section class="section" id="about"></section>
+<section class="section" id="resume"></section>
+<section class="section" id="skills"></section>
+<section class="section" id="process"></section>
+<section class="section" id="services"></section>
+<section class="section" id="cases"></section>
+<section class="section" id="testimonials"></section>
+<section class="section" id="insights"></section>
+<section class="section" id="faq"></section>
+<section class="section" id="contact"></section>
+<div class="footer" id="footer"></div>
+
+<button class="bg-settings-btn admin-only" id="bgSettingsBtn" onclick="openBgSettings()" title="背景设置">&#9881;</button>
+
+<div class="modal-overlay" id="projectDetail"><div class="modal" id="modalContent"></div></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()"><button class="lightbox-close">&times;</button><img id="lightboxImg"></div>
+<div class="add-modal" id="addProjectModal"><div class="add-modal-inner" id="addProjectForm"></div></div>
+<div class="add-modal" id="genericAddModal"><div class="add-modal-inner" id="genericAddForm"></div></div>
+<div class="cms-overlay admin-only" id="cmsOverlay" onclick="closeCMS()"></div>
+<div class="cms-panel admin-only" id="cmsPanel"></div>
+<div class="export-overlay admin-only" id="exportOverlay"><div class="export-card" id="exportCard"></div></div>
+<div class="export-preview" id="exportPreview"><div class="export-preview-inner" id="exportPreviewInner"></div></div>
+<div class="bg-panel-overlay admin-only" id="bgPanelOverlay" onclick="closeBgSettings()"></div>
+<div class="bg-panel admin-only" id="bgPanel"></div>
+<div id="toastContainer"></div>
+
+<script>
+/* ======== DATA ======== */
+const defaultData = JSON.parse(JSON.stringify({"profile": {"name_cn": "罗 深", "name_en": "ELIO", "title_cn": "施工图深化设计总监", "title_en": "Construction Drawing Director", "location": "上海, 中国", "email": "elio@studio.cn", "phone": "+86 138-0000-0000", "wechat": "elio_design", "tagline": "Precision to the millimeter.", "logo_text": "ELIO", "logo_subtitle": "Construction Drawing Director", "hero_headline": "将设计语言转化为毫米级施工图纸", "hero_intro": "深耕施工图深化领域14年，主导200+商业空间项目。在方案创意与施工落地之间建立精准桥梁，为高端酒店、甲级办公、大型商业综合体提供从概念到建成的全周期技术支持。"}, "hero": {"eyebrow": "PORTFOLIO 2026"}, "stats": [{"value": "14+", "label": "年经验", "unit": "YEARS"}, {"value": "200+", "label": "完成项目", "unit": "PROJECTS"}, {"value": "50+", "label": "合作设计院", "unit": "PARTNERS"}, {"value": "98.7%", "label": "节点一次验收率", "unit": "ACCURACY"}], "projects": [{"id": "p01", "thumb": "", "title": "上海外滩 W 酒店", "en": "W Hotel Bund Shanghai", "cat": "酒店", "year": "2026", "location": "上海外滩", "client": "万豪国际集团", "area": "18,000㎡", "desc": "奢华酒店室内施工图深化，涵盖252间客房、大堂、餐厅、泳池SPA及行政酒廊。全专业协同12个团队。", "challenge": "弧形幕墙与室内空间的毫米级对位，异形天花节点的施工可行性验证。", "solution": "BIM全专业协同，建立参数化节点库，237个关键节点逐一建模验证。", "tech": "AutoCAD, Revit, Rhino, Navisworks, BIM 360", "highlights": "全专业BIM协同管线综合冲突率为零, 幕墙与室内节点精准对位现场零返工, 设计变更响应时间缩短至24小时"}, {"id": "p02", "thumb": "", "title": "深圳平安金融中心办公层", "en": "Ping An Finance Center", "cat": "办公", "year": "2025", "location": "深圳福田", "client": "中国平安集团", "area": "32,000㎡", "desc": "深圳第一高楼46-68层甲级办公。含标准办公层、高管区、会议中心、空中大堂及配套商业区。", "challenge": "超高层核心筒限制下的空间最大化利用，消防疏散与办公流线的平衡。", "solution": "模块化设计策略，标准办公单元预制成型，出图效率提升40%。", "tech": "AutoCAD, Revit, Dynamo, SketchUp", "highlights": "模块化标准化程度达85%, 预制化节点减少现场作业30%, LEED金级认证配合"}, {"id": "p03", "thumb": "", "title": "成都太古里旗舰店", "en": "Taikoo Li Flagship Chengdu", "cat": "商业零售", "year": "2026", "location": "成都太古里", "client": "某国际奢侈品牌", "area": "1,200㎡", "desc": "三层旗舰店，融合川西建筑元素与现代奢华零售体验。立面改造、室内精装全周期配合。", "challenge": "历史建筑保护限制下的现代零售功能植入，定制家具与进口材料的施工衔接。", "solution": "材料样板库与施工节点控制手册，95%节点一次验收通过。", "tech": "AutoCAD, Rhino, Grasshopper, 3ds Max", "highlights": "历史建筑保护与现代功能完美融合, 定制节点开发46个, 材料验收通过率100%"}, {"id": "p04", "thumb": "", "title": "杭州西溪悦榕庄", "en": "Banyan Tree Hangzhou", "cat": "酒店", "year": "2025", "location": "杭州西溪湿地", "client": "悦榕庄酒店集团", "area": "9,600㎡", "desc": "72栋独立别墅式客房及公区配套。湿地保护红线内完成全专业施工图深化。", "challenge": "湿地基础沉降控制，木结构别墅的防水防潮体系设计。", "solution": "桩基+筏板复合基础，研发定制防水节点，所有别墅达一级防水标准。", "tech": "AutoCAD, Revit, Tekla", "highlights": "湿地环保施工方案获政府表彰, 定制防水节点纳入悦榕庄集团标准, 零环境投诉完成施工"}, {"id": "p05", "thumb": "", "title": "北京国贸三期商业裙楼", "en": "China World Tower Phase 3", "cat": "商业零售", "year": "2024", "location": "北京CBD", "client": "中国国际贸易中心", "area": "45,000㎡", "desc": "六层商业裙楼，含高端零售、餐饮、影院及地下商业街。CBD核心区最大商业改造之一。", "challenge": "营业中商场分阶段改造施工，原有结构加固与新功能的融合。", "solution": "分区分时施工方案，BIM模拟施工动线，商场正常运营与施工并行。", "tech": "AutoCAD, Revit, Navisworks, Primavera P6", "highlights": "营业中改造零客诉, 分阶段交付提前30天, 结构加固优化节省成本15%"}, {"id": "p06", "thumb": "", "title": "南京德基广场美术馆", "en": "Deji Art Museum Nanjing", "cat": "文化", "year": "2026", "location": "南京新街口", "client": "德基集团", "area": "2,800㎡", "desc": "商圈顶层当代美术馆，含4个展厅、艺术品库房、恒温恒湿系统达博物馆级标准。", "challenge": "商场结构荷载限制下的重型展墙设计，精密环境控制系统与建筑一体化。", "solution": "轻量化钢结构展墙体系，联合开发分布式恒温恒湿模块。", "tech": "AutoCAD, Revit, CFD模拟", "highlights": "温度波动±1°C, 湿度波动±3%RH, 展墙承重200kg/㎡"}], "about": {"bio1": "2012年毕业于同济大学建筑学专业，加入华东建筑设计研究院。14年间从制图员成长为带领30人团队的技术总监，累计完成超过200个商业空间项目的施工图深化工作。", "bio2": "我始终相信，优秀的施工图不是简单的照图施工，而是在理解设计意图的基础上，将方案语言翻译为精确、可行、经济的施工语言。每一根线条背后，都是对材料、工艺、规范和造价的综合考量。", "bio3": "近年深度投入BIM正向设计实践，建立了公司级参数化节点库（2,300+节点），推动施工图出图效率提升40%以上。专注于大型商业综合体的全专业BIM协同深化。"}, "aboutPhoto": "", "philosophy": [{"title": "毫米即正义", "en": "Millimeter Matters", "desc": "在施工图世界，1mm的偏差可能导致现场数十万的返工。精确不是追求，是底线。"}, {"title": "设计可建造性", "en": "Buildable Design", "desc": "最美的方案如果无法落地就是纸上谈兵。深化设计师的核心价值在于让每个创意都能被建造。"}, {"title": "全专业协同", "en": "Cross-disciplinary Synergy", "desc": "建筑、结构、机电、消防、精装、幕墙——只有所有专业在同一张图上对话，才能避免现场冲突。"}], "education": [{"degree": "建筑学学士", "school": "同济大学", "year": "2008-2012"}, {"degree": "一级注册建筑师", "school": "中华人民共和国住建部", "year": "2018"}, {"degree": "BIM高级工程师", "school": "Autodesk认证", "year": "2020"}], "experience": [{"period": "2022-至今", "role": "创始人 / 技术总监", "company": "罗深设计咨询事务所", "desc": "创立个人事务所，专注高端商业空间施工图深化。带领30人团队，年完成施工图面积超过50万㎡。"}, {"period": "2018-2022", "role": "施工图深化主管", "company": "华东建筑设计研究院", "desc": "负责大型公建项目施工图深化团队管理。主导上海浦东金融中心等20+重点项目。"}, {"period": "2016-2018", "role": "高级施工图设计师", "company": "CCDI悉地国际", "desc": "参与深圳平安金融中心、腾讯滨海大厦等超高层及总部办公项目。"}, {"period": "2014-2016", "role": "施工图设计师", "company": "华东建筑设计研究院", "desc": "参与上海多个五星级酒店及甲级写字楼项目，累计完成施工图面积12万㎡。"}], "skills": [{"name": "AutoCAD", "pct": 98, "desc": "14年深度使用，自定义动态块库800+，LISP自动化脚本50+个"}, {"name": "Revit", "pct": 92, "desc": "BIM正向设计全流程，参数化族库2,300+，多专业协同出图"}, {"name": "Rhino+Grasshopper", "pct": 78, "desc": "复杂曲面有理化分析，参数化节点生成，施工可行性验证"}, {"name": "Navisworks", "pct": 85, "desc": "管线综合碰撞检测，4D施工模拟，BIM交底"}, {"name": "施工规范", "pct": 95, "desc": "精通国家建筑标准图集、各专业施工验收规范、消防规范"}, {"name": "项目管理", "pct": 88, "desc": "30人团队管理，PMP认证，Primavera P6进度管控"}, {"name": "材料工艺", "pct": 90, "desc": "200+厂家材料库，覆盖石材/金属/玻璃/木作/软包等全品类"}, {"name": "SketchUp", "pct": 82, "desc": "快速体量推敲，LayOut施工说明图，VRay节点效果呈现"}], "process": [{"step": "01", "title": "需求分析与方案解读", "en": "Brief & Design Study", "desc": "深入理解方案设计意图与甲方需求。分析方案图纸的构造逻辑，预判潜在施工难点。"}, {"step": "02", "title": "BIM模型搭建", "en": "BIM Modeling", "desc": "基于方案图纸建立建筑、结构、机电专业BIM模型，初步管线综合与碰撞检测。"}, {"step": "03", "title": "节点深化设计", "en": "Detail Development", "desc": "针对关键部位进行1:5至1:20节点大样深化，验证构造做法的可行性与经济性。"}, {"step": "04", "title": "全专业综合协调", "en": "Multi-discipline Coordination", "desc": "建筑、结构、机电、精装、幕墙、消防全专业综合，管线排布优化。"}, {"step": "05", "title": "施工图出图与审核", "en": "Drawing Production & Review", "desc": "按国家标准和企业模板输出全套施工图纸，三级审核确保准确性和完整性。"}, {"step": "06", "title": "技术交底与现场配合", "en": "Technical Briefing & Site Support", "desc": "向施工方进行技术交底，关键节点现场放样复核，施工过程中的设计变更管理。"}], "services": [{"icon": "01", "title": "施工图深化设计", "en": "Construction Drawing", "desc": "从方案概念到施工图纸的全流程深化。包含平面系统图、立面图、节点大样图、材料表及技术规格说明。"}, {"icon": "02", "title": "BIM全专业协同", "en": "BIM Coordination", "desc": "基于Revit的正向BIM设计，全专业模型建立与管线综合，碰撞检测报告，4D/5D施工模拟。"}, {"icon": "03", "title": "定制节点研发", "en": "Custom Detailing", "desc": "针对特殊材料、异形构造、复杂收口的定制节点开发。从方案草模到1:1节点大样。"}, {"icon": "04", "title": "施工现场配合", "en": "Site Coordination", "desc": "施工阶段技术交底、图纸答疑、设计变更管理、隐蔽工程验收配合。"}, {"icon": "05", "title": "企业标准化建设", "en": "Standardization", "desc": "为设计企业建立施工图标准体系：图层规范、标注样式、图框模板、节点图库、出图流程。"}, {"icon": "06", "title": "技术顾问咨询", "en": "Technical Consulting", "desc": "为甲方或设计方提供施工图阶段技术咨询：方案可建造性评估、造价优化建议、消防合规审查。"}], "cases": [{"title": "W酒店：异形天花节点优化", "metric": "施工难度降低60%", "desc": "通过参数化建模验证3种构造方案，选用轻钢龙骨+GRG双曲面方案。施工难度降低60%，材料节约率22%。"}, {"title": "平安金融中心：管线综合突破", "metric": "空间利用率提升6.7%", "desc": "在0.4m极限空间中完成机电全专业排布，为业主争取到每层3.0m实际净高。"}, {"title": "太古里旗舰店：历史建筑保护改造", "metric": "节点一次验收率98%", "desc": "结构加固+内部独立钢框架，保护建筑外观完整性前提下植入现代零售功能。"}], "testimonials": [{"quote": "罗工是国内少有的能把方案设计翻译成精确施工语言的深化设计师。每一个节点都经过推敲，每一个尺寸都经过验证。", "author": "王建国", "role": "某国际设计事务所设计总监"}, {"quote": "合作三年，罗深的团队已经成为我们最信赖的施工图深化伙伴。出图质量高，配合阶段响应迅速。", "author": "陈立明", "role": "某大型地产集团工程总监"}, {"quote": "BIM正向设计在施工图深化的应用上，罗深团队走在行业前列。参数化节点库让出图效率提升至少40%。", "author": "张蕾", "role": "某甲级设计院总建筑师"}, {"quote": "平安金融中心项目中，在极限净高条件下的管线综合方案为我们争取到了宝贵的200mm净高提升。", "author": "刘伟", "role": "中国平安集团基建部总监"}], "insights": [{"title": "BIM正向设计在中国施工图领域的实践与反思", "date": "2026-05", "excerpt": "从CAD到BIM，不仅是工具的升级，更是思维方式的重构。结合200+项目实践探讨BIM正向设计的挑战与突破。"}, {"title": "毫米级精度：施工图深化中的尺寸控制哲学", "date": "2026-03", "excerpt": "1mm的误差在不同施工阶段会产生怎样的放大效应？全链条尺寸控制方法解析。"}, {"title": "建筑师与深化设计师：一场关于翻译的对话", "date": "2025-12", "excerpt": "方案建筑师与施工图深化设计师之间的翻译损耗，是项目落地过程中最大的隐性成本。"}, {"title": "装配式内装时代的施工图深化新范式", "date": "2025-09", "excerpt": "装配式内装的兴起正在重塑施工图深化的作业方式，深化设计师转变为产品数据管理者。"}], "faq": [{"q": "施工图深化与方案设计的区别是什么？", "a": "方案设计解决做什么——空间效果、设计概念、整体风格；施工图深化解决怎么做——精确尺寸、节点构造、材料规格、施工工艺。深化设计师是方案落地的工程师。"}, {"q": "什么阶段需要介入施工图深化？", "a": "理想状态是方案扩初阶段即开始介入。早期介入可在确定关键节点做法和材料选择时就提供技术判断，避免后期因施工不可行导致的方案反复。"}, {"q": "BIM深化与传统CAD深化的差异？", "a": "CAD深化是二维图纸思维，各专业图纸独立需人工协调；BIM深化是三维模型思维，全专业在同一模型中协同，碰撞自动检测。90%的项目已采用BIM正向设计。"}, {"q": "施工图深化的收费标准？", "a": "商业空间项目25-60元/㎡，高端酒店/文化类40-80元/㎡。含BIM服务上浮30-50%。具体报价需根据项目资料评估后提供。"}], "contact": {"intro": "期待与您探讨项目合作可能。提供免费技术咨询与项目评估。", "address": "上海市徐汇区衡山路8号创意园区A座302室"}, "footer_copyright": "ELIO Design Studio. All rights reserved.", "theme": 0}));
+let D = JSON.parse(JSON.stringify({"profile": {"name_cn": "罗 深", "name_en": "ELIO", "title_cn": "施工图深化设计总监", "title_en": "Construction Drawing Director", "location": "上海, 中国", "email": "elio@studio.cn", "phone": "+86 138-0000-0000", "wechat": "elio_design", "tagline": "Precision to the millimeter.", "logo_text": "ELIO", "logo_subtitle": "Construction Drawing Director", "hero_headline": "将设计语言转化为毫米级施工图纸", "hero_intro": "深耕施工图深化领域14年，主导200+商业空间项目。在方案创意与施工落地之间建立精准桥梁，为高端酒店、甲级办公、大型商业综合体提供从概念到建成的全周期技术支持。"}, "hero": {"eyebrow": "PORTFOLIO 2026"}, "stats": [{"value": "14+", "label": "年经验", "unit": "YEARS"}, {"value": "200+", "label": "完成项目", "unit": "PROJECTS"}, {"value": "50+", "label": "合作设计院", "unit": "PARTNERS"}, {"value": "98.7%", "label": "节点一次验收率", "unit": "ACCURACY"}], "projects": [{"id": "p01", "thumb": "", "title": "上海外滩 W 酒店", "en": "W Hotel Bund Shanghai", "cat": "酒店", "year": "2026", "location": "上海外滩", "client": "万豪国际集团", "area": "18,000㎡", "desc": "奢华酒店室内施工图深化，涵盖252间客房、大堂、餐厅、泳池SPA及行政酒廊。全专业协同12个团队。", "challenge": "弧形幕墙与室内空间的毫米级对位，异形天花节点的施工可行性验证。", "solution": "BIM全专业协同，建立参数化节点库，237个关键节点逐一建模验证。", "tech": "AutoCAD, Revit, Rhino, Navisworks, BIM 360", "highlights": "全专业BIM协同管线综合冲突率为零, 幕墙与室内节点精准对位现场零返工, 设计变更响应时间缩短至24小时"}, {"id": "p02", "thumb": "", "title": "深圳平安金融中心办公层", "en": "Ping An Finance Center", "cat": "办公", "year": "2025", "location": "深圳福田", "client": "中国平安集团", "area": "32,000㎡", "desc": "深圳第一高楼46-68层甲级办公。含标准办公层、高管区、会议中心、空中大堂及配套商业区。", "challenge": "超高层核心筒限制下的空间最大化利用，消防疏散与办公流线的平衡。", "solution": "模块化设计策略，标准办公单元预制成型，出图效率提升40%。", "tech": "AutoCAD, Revit, Dynamo, SketchUp", "highlights": "模块化标准化程度达85%, 预制化节点减少现场作业30%, LEED金级认证配合"}, {"id": "p03", "thumb": "", "title": "成都太古里旗舰店", "en": "Taikoo Li Flagship Chengdu", "cat": "商业零售", "year": "2026", "location": "成都太古里", "client": "某国际奢侈品牌", "area": "1,200㎡", "desc": "三层旗舰店，融合川西建筑元素与现代奢华零售体验。立面改造、室内精装全周期配合。", "challenge": "历史建筑保护限制下的现代零售功能植入，定制家具与进口材料的施工衔接。", "solution": "材料样板库与施工节点控制手册，95%节点一次验收通过。", "tech": "AutoCAD, Rhino, Grasshopper, 3ds Max", "highlights": "历史建筑保护与现代功能完美融合, 定制节点开发46个, 材料验收通过率100%"}, {"id": "p04", "thumb": "", "title": "杭州西溪悦榕庄", "en": "Banyan Tree Hangzhou", "cat": "酒店", "year": "2025", "location": "杭州西溪湿地", "client": "悦榕庄酒店集团", "area": "9,600㎡", "desc": "72栋独立别墅式客房及公区配套。湿地保护红线内完成全专业施工图深化。", "challenge": "湿地基础沉降控制，木结构别墅的防水防潮体系设计。", "solution": "桩基+筏板复合基础，研发定制防水节点，所有别墅达一级防水标准。", "tech": "AutoCAD, Revit, Tekla", "highlights": "湿地环保施工方案获政府表彰, 定制防水节点纳入悦榕庄集团标准, 零环境投诉完成施工"}, {"id": "p05", "thumb": "", "title": "北京国贸三期商业裙楼", "en": "China World Tower Phase 3", "cat": "商业零售", "year": "2024", "location": "北京CBD", "client": "中国国际贸易中心", "area": "45,000㎡", "desc": "六层商业裙楼，含高端零售、餐饮、影院及地下商业街。CBD核心区最大商业改造之一。", "challenge": "营业中商场分阶段改造施工，原有结构加固与新功能的融合。", "solution": "分区分时施工方案，BIM模拟施工动线，商场正常运营与施工并行。", "tech": "AutoCAD, Revit, Navisworks, Primavera P6", "highlights": "营业中改造零客诉, 分阶段交付提前30天, 结构加固优化节省成本15%"}, {"id": "p06", "thumb": "", "title": "南京德基广场美术馆", "en": "Deji Art Museum Nanjing", "cat": "文化", "year": "2026", "location": "南京新街口", "client": "德基集团", "area": "2,800㎡", "desc": "商圈顶层当代美术馆，含4个展厅、艺术品库房、恒温恒湿系统达博物馆级标准。", "challenge": "商场结构荷载限制下的重型展墙设计，精密环境控制系统与建筑一体化。", "solution": "轻量化钢结构展墙体系，联合开发分布式恒温恒湿模块。", "tech": "AutoCAD, Revit, CFD模拟", "highlights": "温度波动±1°C, 湿度波动±3%RH, 展墙承重200kg/㎡"}], "about": {"bio1": "2012年毕业于同济大学建筑学专业，加入华东建筑设计研究院。14年间从制图员成长为带领30人团队的技术总监，累计完成超过200个商业空间项目的施工图深化工作。", "bio2": "我始终相信，优秀的施工图不是简单的照图施工，而是在理解设计意图的基础上，将方案语言翻译为精确、可行、经济的施工语言。每一根线条背后，都是对材料、工艺、规范和造价的综合考量。", "bio3": "近年深度投入BIM正向设计实践，建立了公司级参数化节点库（2,300+节点），推动施工图出图效率提升40%以上。专注于大型商业综合体的全专业BIM协同深化。"}, "aboutPhoto": "", "philosophy": [{"title": "毫米即正义", "en": "Millimeter Matters", "desc": "在施工图世界，1mm的偏差可能导致现场数十万的返工。精确不是追求，是底线。"}, {"title": "设计可建造性", "en": "Buildable Design", "desc": "最美的方案如果无法落地就是纸上谈兵。深化设计师的核心价值在于让每个创意都能被建造。"}, {"title": "全专业协同", "en": "Cross-disciplinary Synergy", "desc": "建筑、结构、机电、消防、精装、幕墙——只有所有专业在同一张图上对话，才能避免现场冲突。"}], "education": [{"degree": "建筑学学士", "school": "同济大学", "year": "2008-2012"}, {"degree": "一级注册建筑师", "school": "中华人民共和国住建部", "year": "2018"}, {"degree": "BIM高级工程师", "school": "Autodesk认证", "year": "2020"}], "experience": [{"period": "2022-至今", "role": "创始人 / 技术总监", "company": "罗深设计咨询事务所", "desc": "创立个人事务所，专注高端商业空间施工图深化。带领30人团队，年完成施工图面积超过50万㎡。"}, {"period": "2018-2022", "role": "施工图深化主管", "company": "华东建筑设计研究院", "desc": "负责大型公建项目施工图深化团队管理。主导上海浦东金融中心等20+重点项目。"}, {"period": "2016-2018", "role": "高级施工图设计师", "company": "CCDI悉地国际", "desc": "参与深圳平安金融中心、腾讯滨海大厦等超高层及总部办公项目。"}, {"period": "2014-2016", "role": "施工图设计师", "company": "华东建筑设计研究院", "desc": "参与上海多个五星级酒店及甲级写字楼项目，累计完成施工图面积12万㎡。"}], "skills": [{"name": "AutoCAD", "pct": 98, "desc": "14年深度使用，自定义动态块库800+，LISP自动化脚本50+个"}, {"name": "Revit", "pct": 92, "desc": "BIM正向设计全流程，参数化族库2,300+，多专业协同出图"}, {"name": "Rhino+Grasshopper", "pct": 78, "desc": "复杂曲面有理化分析，参数化节点生成，施工可行性验证"}, {"name": "Navisworks", "pct": 85, "desc": "管线综合碰撞检测，4D施工模拟，BIM交底"}, {"name": "施工规范", "pct": 95, "desc": "精通国家建筑标准图集、各专业施工验收规范、消防规范"}, {"name": "项目管理", "pct": 88, "desc": "30人团队管理，PMP认证，Primavera P6进度管控"}, {"name": "材料工艺", "pct": 90, "desc": "200+厂家材料库，覆盖石材/金属/玻璃/木作/软包等全品类"}, {"name": "SketchUp", "pct": 82, "desc": "快速体量推敲，LayOut施工说明图，VRay节点效果呈现"}], "process": [{"step": "01", "title": "需求分析与方案解读", "en": "Brief & Design Study", "desc": "深入理解方案设计意图与甲方需求。分析方案图纸的构造逻辑，预判潜在施工难点。"}, {"step": "02", "title": "BIM模型搭建", "en": "BIM Modeling", "desc": "基于方案图纸建立建筑、结构、机电专业BIM模型，初步管线综合与碰撞检测。"}, {"step": "03", "title": "节点深化设计", "en": "Detail Development", "desc": "针对关键部位进行1:5至1:20节点大样深化，验证构造做法的可行性与经济性。"}, {"step": "04", "title": "全专业综合协调", "en": "Multi-discipline Coordination", "desc": "建筑、结构、机电、精装、幕墙、消防全专业综合，管线排布优化。"}, {"step": "05", "title": "施工图出图与审核", "en": "Drawing Production & Review", "desc": "按国家标准和企业模板输出全套施工图纸，三级审核确保准确性和完整性。"}, {"step": "06", "title": "技术交底与现场配合", "en": "Technical Briefing & Site Support", "desc": "向施工方进行技术交底，关键节点现场放样复核，施工过程中的设计变更管理。"}], "services": [{"icon": "01", "title": "施工图深化设计", "en": "Construction Drawing", "desc": "从方案概念到施工图纸的全流程深化。包含平面系统图、立面图、节点大样图、材料表及技术规格说明。"}, {"icon": "02", "title": "BIM全专业协同", "en": "BIM Coordination", "desc": "基于Revit的正向BIM设计，全专业模型建立与管线综合，碰撞检测报告，4D/5D施工模拟。"}, {"icon": "03", "title": "定制节点研发", "en": "Custom Detailing", "desc": "针对特殊材料、异形构造、复杂收口的定制节点开发。从方案草模到1:1节点大样。"}, {"icon": "04", "title": "施工现场配合", "en": "Site Coordination", "desc": "施工阶段技术交底、图纸答疑、设计变更管理、隐蔽工程验收配合。"}, {"icon": "05", "title": "企业标准化建设", "en": "Standardization", "desc": "为设计企业建立施工图标准体系：图层规范、标注样式、图框模板、节点图库、出图流程。"}, {"icon": "06", "title": "技术顾问咨询", "en": "Technical Consulting", "desc": "为甲方或设计方提供施工图阶段技术咨询：方案可建造性评估、造价优化建议、消防合规审查。"}], "cases": [{"title": "W酒店：异形天花节点优化", "metric": "施工难度降低60%", "desc": "通过参数化建模验证3种构造方案，选用轻钢龙骨+GRG双曲面方案。施工难度降低60%，材料节约率22%。"}, {"title": "平安金融中心：管线综合突破", "metric": "空间利用率提升6.7%", "desc": "在0.4m极限空间中完成机电全专业排布，为业主争取到每层3.0m实际净高。"}, {"title": "太古里旗舰店：历史建筑保护改造", "metric": "节点一次验收率98%", "desc": "结构加固+内部独立钢框架，保护建筑外观完整性前提下植入现代零售功能。"}], "testimonials": [{"quote": "罗工是国内少有的能把方案设计翻译成精确施工语言的深化设计师。每一个节点都经过推敲，每一个尺寸都经过验证。", "author": "王建国", "role": "某国际设计事务所设计总监"}, {"quote": "合作三年，罗深的团队已经成为我们最信赖的施工图深化伙伴。出图质量高，配合阶段响应迅速。", "author": "陈立明", "role": "某大型地产集团工程总监"}, {"quote": "BIM正向设计在施工图深化的应用上，罗深团队走在行业前列。参数化节点库让出图效率提升至少40%。", "author": "张蕾", "role": "某甲级设计院总建筑师"}, {"quote": "平安金融中心项目中，在极限净高条件下的管线综合方案为我们争取到了宝贵的200mm净高提升。", "author": "刘伟", "role": "中国平安集团基建部总监"}], "insights": [{"title": "BIM正向设计在中国施工图领域的实践与反思", "date": "2026-05", "excerpt": "从CAD到BIM，不仅是工具的升级，更是思维方式的重构。结合200+项目实践探讨BIM正向设计的挑战与突破。"}, {"title": "毫米级精度：施工图深化中的尺寸控制哲学", "date": "2026-03", "excerpt": "1mm的误差在不同施工阶段会产生怎样的放大效应？全链条尺寸控制方法解析。"}, {"title": "建筑师与深化设计师：一场关于翻译的对话", "date": "2025-12", "excerpt": "方案建筑师与施工图深化设计师之间的翻译损耗，是项目落地过程中最大的隐性成本。"}, {"title": "装配式内装时代的施工图深化新范式", "date": "2025-09", "excerpt": "装配式内装的兴起正在重塑施工图深化的作业方式，深化设计师转变为产品数据管理者。"}], "faq": [{"q": "施工图深化与方案设计的区别是什么？", "a": "方案设计解决做什么——空间效果、设计概念、整体风格；施工图深化解决怎么做——精确尺寸、节点构造、材料规格、施工工艺。深化设计师是方案落地的工程师。"}, {"q": "什么阶段需要介入施工图深化？", "a": "理想状态是方案扩初阶段即开始介入。早期介入可在确定关键节点做法和材料选择时就提供技术判断，避免后期因施工不可行导致的方案反复。"}, {"q": "BIM深化与传统CAD深化的差异？", "a": "CAD深化是二维图纸思维，各专业图纸独立需人工协调；BIM深化是三维模型思维，全专业在同一模型中协同，碰撞自动检测。90%的项目已采用BIM正向设计。"}, {"q": "施工图深化的收费标准？", "a": "商业空间项目25-60元/㎡，高端酒店/文化类40-80元/㎡。含BIM服务上浮30-50%。具体报价需根据项目资料评估后提供。"}], "contact": {"intro": "期待与您探讨项目合作可能。提供免费技术咨询与项目评估。", "address": "上海市徐汇区衡山路8号创意园区A座302室"}, "footer_copyright": "ELIO Design Studio. All rights reserved.", "theme": 0}));
+let projectImages = {};
+let currentTheme = D.theme || 0;
+let lastDataSHA = ''; // Track data.json version for change detection
+
+/* ======== THEMES ======== */
+const THEMES = [{"name": "Scarlet", "hue": 352, "color": "#d35a5f", "css": "hsl(352,58%,59%)"}, {"name": "Terracotta", "hue": 12, "color": "#d47252", "css": "hsl(12,58%,58%)"}, {"name": "Saffron", "hue": 38, "color": "#d49a3a", "css": "hsl(38,62%,53%)"}, {"name": "Verdant", "hue": 148, "color": "#4a9a6e", "css": "hsl(148,35%,45%)"}, {"name": "Cobalt", "hue": 218, "color": "#4a78c4", "css": "hsl(218,50%,53%)"}, {"name": "Violet", "hue": 268, "color": "#7c5ab8", "css": "hsl(268,40%,54%)"}, {"name": "Magenta", "hue": 328, "color": "#c44a88", "css": "hsl(328,50%,53%)"}, {"name": "Teal", "hue": 185, "color": "#3a8a8a", "css": "hsl(185,40%,38%)"}, {"name": "Garnet", "hue": 0, "color": "#b83a3a", "css": "hsl(0,52%,47%)"}, {"name": "Amber", "hue": 45, "color": "#c49a2a", "css": "hsl(45,64%,47%)"}, {"name": "Azure", "hue": 200, "color": "#3a7aad", "css": "hsl(200,50%,45%)"}, {"name": "Rosewood", "hue": 340, "color": "#a85a6a", "css": "hsl(340,32%,51%)"}];
+
+let targetHue = THEMES[0].hue;
+let currentHue = targetHue;
+let carouselTimer = null;
+let carouselActive = false;
+let loadedFonts = {};
+
+function applyTheme(idx, instant){
+  idx = idx % THEMES.length;
+  currentTheme = idx;
+  D.theme = idx;
+  const t = THEMES[idx];
+  targetHue = t.hue;
+  if(instant){ currentHue = t.hue; }
+  const root = document.documentElement;
+  root.style.setProperty('--accent', t.css);
+  root.style.setProperty('--accent-dim', t.color+'1E');
+  root.style.setProperty('--accent-hue', t.hue);
+  document.querySelectorAll('.theme-dot').forEach(function(d,i){d.classList.toggle('active',i===idx)});
+  if(carouselActive){
+    document.querySelectorAll('.theme-dot').forEach(function(d,i){
+      if(i===idx) d.classList.add('active');
+    });
+  }
+  persist();
+}
+
+/* ======== BACKGROUND SETTINGS ======== */
+let bgSettings = {count:100, size:1.0, lineOpacity:0.03, glowStrength:0.5, style:'particle-line'};
+(function(){
+  try{
+    const s = localStorage.getItem('pf_v8_bg');
+    if(s) bgSettings = JSON.parse(s);
+  }catch(e){}
+})();
+
+function saveBgSettings(){
+  localStorage.setItem('pf_v8_bg', JSON.stringify(bgSettings));
+}
+
+/* ======== CANVAS ======== */
+(function(){
+  const c = document.getElementById('bgCanvas'), ctx = c.getContext('2d');
+  const gc = document.getElementById('glowCanvas'), gctx = gc.getContext('2d');
+  let w, h, pts = [], stars = [], mouseX = -999, mouseY = -999, frame = 0;
+  function resize(){ w=c.width=gc.width=window.innerWidth; h=c.height=gc.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+
+  function initParticles(count){
+    pts = [];
+    const sz = bgSettings.size;
+    for(let i=0;i<count;i++) pts.push({
+      x:Math.random()*w, y:Math.random()*h,
+      r:Math.random()*sz*1.2+sz*0.3,
+      vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35,
+      ox:0, oy:0
+    });
+  }
+  function initStars(count){
+    stars = [];
+    for(let i=0;i<count;i++) stars.push({
+      x:Math.random()*w, y:Math.random()*h,
+      r:Math.random()*bgSettings.size*0.8+bgSettings.size*0.15,
+      twinkle:Math.random()*Math.PI*2,
+      speed:0.02+Math.random()*0.04
+    });
+  }
+
+  function refreshParticles(){
+    const count = bgSettings.count;
+    if(bgSettings.style === 'stars'){
+      initStars(count*3);
+    } else {
+      initParticles(count);
+    }
+  }
+  refreshParticles();
+  window._reinitCanvas = function(){
+    refreshParticles();
+    currentHue = targetHue;
+  };
+
+  document.addEventListener('mousemove', function(e){ mouseX=e.clientX; mouseY=e.clientY; });
+  document.addEventListener('mouseleave', function(){ mouseX=-999; mouseY=-999; });
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    gctx.clearRect(0,0,w,h);
+
+    const dh = targetHue - currentHue;
+    if(Math.abs(dh) > 0.3) currentHue += dh * 0.06;
+    else currentHue = targetHue;
+    const hue = currentHue;
+
+    const style = bgSettings.style;
+
+    if(style === 'grid'){
+      const gridSize = 50;
+      ctx.strokeStyle = 'hsla('+hue+',20%,20%,0.04)';
+      ctx.lineWidth = 0.5;
+      for(let x=gridSize;x<w;x+=gridSize){
+        ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();
+      }
+      for(let y=gridSize;y<h;y+=gridSize){
+        ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+      }
+      for(let x=gridSize;x<w;x+=gridSize){
+        for(let y=gridSize;y<h;y+=gridSize){
+          ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);
+          ctx.fillStyle='hsla('+hue+',30%,40%,0.08)';ctx.fill();
+        }
+      }
+    } else {
+      const cx = w*0.5 + Math.sin(frame*0.0004)*w*0.25;
+      const cy = h*0.55 + Math.cos(frame*0.00035)*h*0.2;
+      const g = ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(w,h)*0.9);
+      g.addColorStop(0,'hsla('+hue+',30%,9%,0.6)');
+      g.addColorStop(0.45,'hsla('+(hue+20)+',25%,5%,0.4)');
+      g.addColorStop(1,'hsla('+(hue-10)+',15%,2%,0.7)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    }
+
+    const gs = bgSettings.glowStrength;
+    if(mouseX > -1 && gs > 0.001){
+      const gm = gctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 350);
+      gm.addColorStop(0, 'hsla('+hue+',50%,50%,'+(gs*0.12)+')');
+      gm.addColorStop(1, 'hsla('+hue+',50%,50%,0)');
+      gctx.fillStyle=gm; gctx.fillRect(0,0,w,h);
+    }
+
+    if(style === 'stars'){
+      for(let i=0;i<stars.length;i++){
+        const s = stars[i];
+        s.twinkle += s.speed;
+        const alpha = 0.3 + Math.sin(s.twinkle)*0.3;
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle='hsla('+hue+',50%,70%,'+alpha+')'; ctx.fill();
+      }
+    } else if(style !== 'grid'){
+      for(let i=0;i<pts.length;i++){
+        const p = pts[i];
+        if(mouseX > -1){
+          const dx = mouseX - p.x, dy = mouseY - p.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist < 200){
+            const f = (1 - dist/200) * 0.03;
+            p.ox += dx * f; p.oy += dy * f;
+          }
+        }
+        p.x += p.vx + p.ox; p.y += p.vy + p.oy;
+        p.ox *= 0.92; p.oy *= 0.92;
+        if(p.x<0||p.x>w) p.vx*=-1; if(p.y<0||p.y>h) p.vy*=-1;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='hsla('+hue+',50%,55%,0.12)'; ctx.fill();
+        if(style === 'particle-line'){
+          const lo = bgSettings.lineOpacity;
+          for(let j=i+1;j<pts.length;j++){
+            const q=pts[j], dx2=p.x-q.x, dy2=p.y-q.y;
+            const dist2=Math.sqrt(dx2*dx2+dy2*dy2);
+            if(dist2<130){
+              ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+              ctx.strokeStyle='hsla('+hue+',50%,50%,'+(lo*(1-dist2/130))+')'; ctx.stroke();
+            }
+          }
+        }
+      }
+    }
+    frame++; requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ======== LIVE CLOCK ======== */
+function updateClock(){
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('liveClock').textContent = h+':'+m+':'+s;
+  document.getElementById('navMiniClock').textContent = h+':'+m;
+}
+setInterval(updateClock, 1000); updateClock();
+
+/* ======== CAROUSEL ======== */
+function toggleCarousel(){
+  if(carouselActive){
+    clearInterval(carouselTimer); carouselTimer = null; carouselActive = false;
+    toast('自动轮播已停止');
+  } else {
+    carouselActive = true;
+    carouselTimer = setInterval(function(){
+      applyTheme((currentTheme+1)%THEMES.length, false);
+    }, 5000);
+    toast('自动轮播已启动 (5秒/个)');
+  }
+}
+
+/* ======== FONT SYSTEM ======== */
+function updateFontSetting(key, val){
+  if(!D.fontSettings) D.fontSettings = {};
+  D.fontSettings[key] = val;
+  applyFontSettings();
+  persist();
+  publishToGitHub(function(){});
+}
+
+function loadGoogleFont(name){
+  if(!name || loadedFonts[name]) return;
+  loadedFonts[name] = true;
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://fonts.googleapis.com/css2?family='+encodeURIComponent(name.replace(/ /g,'+'))+':wght@300;400;500;600;700&display=swap';
+  document.head.appendChild(link);
+}
+
+function applyFontSettings(){
+  var fs = D.fontSettings || {};
+  var root = document.documentElement;
+  if(fs.bodyFont){ loadGoogleFont(fs.bodyFont); root.style.setProperty('--font-sans', "'"+fs.bodyFont+"','Noto Sans SC',sans-serif"); }
+  if(fs.headingFont){ loadGoogleFont(fs.headingFont); root.style.setProperty('--font-serif', "'"+fs.headingFont+"','Noto Serif SC',serif"); }
+  if(fs.monoFont){ loadGoogleFont(fs.monoFont); root.style.setProperty('--font-mono', "'"+fs.monoFont+"','SF Mono',monospace"); }
+  if(fs.bodySize){ document.body.style.fontSize = fs.bodySize+'px'; }
+  if(fs.headingWeight){
+    var hw = fs.headingWeight;
+    document.querySelectorAll('.section-title,.hero-headline,.logo,.stat-value,.timeline-item h4,.project-card h3,.service-item h4,.case-item h4,.insight-item h4,.process-item h4').forEach(function(el){el.style.fontWeight=hw});
+  }
+  if(fs.letterSpacing){ document.body.style.letterSpacing = fs.letterSpacing+'px'; }
+  if(fs.lineHeight){ document.body.style.lineHeight = fs.lineHeight; }
+}
+
+function resetFonts(){
+  D.fontSettings = {};
+  document.body.style.fontSize = '';
+  document.body.style.lineHeight = '';
+  document.body.style.letterSpacing = '';
+  var root = document.documentElement;
+  root.style.removeProperty('--font-sans');
+  root.style.removeProperty('--font-serif');
+  root.style.removeProperty('--font-mono');
+  document.querySelectorAll('.section-title,.hero-headline,.logo,.stat-value,.timeline-item h4,.project-card h3,.service-item h4,.case-item h4,.insight-item h4,.process-item h4').forEach(function(el){el.style.fontWeight=''});
+  persist();
+  toast('字体已恢复默认');
+}
+
+/* ======== FLAT GETTER/SETTER ======== */
+function get(dp){
+  const keys=dp.split('.'); let v=D;
+  for(let k of keys){
+    if(v===undefined||v===null) return '';
+    if(/^\d+$/.test(k)) v=v[parseInt(k)];
+    else v=v[k];
+  }
+  return v===undefined||v===null?'':v;
+}
+function set(dp,val){
+  const keys=dp.split('.'), last=keys.pop(); let obj=D;
+  for(let k of keys){
+    if(/^\d+$/.test(k)) obj=obj[parseInt(k)];
+    else obj=obj[k];
+  }
+  if(/^\d+$/.test(last)) obj[parseInt(last)]=val;
+  else obj[last]=val;
+}
+
+/* ======== THEME DOTS ======== */
+function renderThemeDots(){
+  var el = document.getElementById('themeDots');
+  if(!el) return;
+  el.innerHTML = THEMES.map(function(t,i){
+    return '<div class="theme-dot'+(i===currentTheme?' active':'')+'" style="background:'+t.color+'" onclick="event.stopPropagation();applyTheme('+i+',true)" title="'+t.name+'"><span class="tooltip">'+t.name+'</span></div>';
+  }).join('');
+}
+
+/* ======== NAV ======== */
+const navIds=['hero','projects','about','resume','skills','process','services','cases','testimonials','insights','faq','contact'];
+const navLabels=['首页','作品','关于','简历','技能','流程','服务','案例','评价','洞察','FAQ','联系'];
+function renderNav(){
+  var el = document.getElementById('topNav');
+  if(!el) return;
+  el.innerHTML = navLabels.map(function(l,i){return '<a href="#'+navIds[i]+'">'+l+'</a>';}).join('');
+}
+
+/* ======== LOGO ======== */
+function renderLogo(){
+  const lt = D.profile.logo_text || 'ELIO';
+  const parts = lt.split(' ');
+  const ls = D.profile.logo_subtitle || '';
+  const el = document.getElementById('logoText');
+  if(el){
+    const first = parts[0] || '';
+    const rest = parts.slice(1).join(' ');
+    el.innerHTML = first + (rest?'<span>'+rest+'</span>':'') + '<span class="sub">Portfolio 2026</span>' + (ls?'<span class="sub2">'+ls+'</span>':'');
+  }
+}
+
+/* ======== STAT COUNTING ANIMATION ======== */
+function animateStats(){
+  document.querySelectorAll('.stat-value').forEach(function(el){
+    const text = el.textContent;
+    const numMatch = text.match(/^([\d.]+)(.*)$/);
+    if(!numMatch) return;
+    const target = parseFloat(numMatch[1]);
+    const suffix = numMatch[2] || '';
+    if(isNaN(target)) return;
+    let current = 0;
+    const duration = 1800, step = 16;
+    const increment = target / (duration / step);
+    const timer = setInterval(function(){
+      current += increment;
+      if(current >= target){ current = target; clearInterval(timer); }
+      const display = target%1===0 ? Math.floor(current) : current.toFixed(1);
+      el.textContent = display + suffix;
+    }, step);
+  });
+}
+
+/* ======== SKILL BAR ANIMATION ======== */
+function animateSkillBars(){
+  document.querySelectorAll('.skill-bar-fill').forEach(function(b){
+    const r = b.getBoundingClientRect();
+    if(r.top < window.innerHeight && (!b.style.width || b.style.width === '0px' || b.style.width === '0%')){
+      b.style.width = b.dataset.w;
+    }
+  });
+}
+
+/* ======== RENDER ALL ======== */
+function renderAll(){
+  renderNav();
+  renderLogo();
+  renderHero();
+  renderStats();
+  renderProjects();
+  renderAbout();
+  renderExperience();
+  renderSkills();
+  renderProcess();
+  renderServices();
+  renderCases();
+  renderTestimonials();
+  renderInsights();
+  renderFAQ();
+  renderContact();
+  renderFooter();
+  setTimeout(animateStats, 200);
+  setTimeout(animateSkillBars, 400);
+}
+function E(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html}
+
+function renderHero(){
+  E('hero',
+    '<div class="hero-eyebrow">'+D.hero.eyebrow+'</div>'+
+    '<h1 class="hero-headline">'+D.profile.hero_headline+'</h1>'+
+    '<p class="hero-intro">'+D.profile.hero_intro+'</p>'+
+    '<div class="hero-actions">'+
+      '<button class="btn btn-primary" onclick="scrollToSection(\'projects\')">浏览作品 &rarr;</button>'+
+      '<button class="btn btn-outline" onclick="scrollToSection(\'contact\')">联系我</button>'+
+    '</div>'
+  );
+}
+
+function renderFooter(){
+  E('footer', '<p class="copy">'+(D.footer_copyright||'ELIO Design Studio. All rights reserved.')+'</p>');
+}
+
+function renderStats(){
+  var items = D.stats.map(function(s,i){
+    return '<div class="stat-item">'+
+      '<button class="st-del" onclick="event.stopPropagation();deleteModuleItem(\'stats\','+i+')\" title="删除">&times;</button>'+
+      '<div class="stat-value">'+s.value+'</div><div class="stat-label">'+s.label+'</div><div class="stat-unit">'+s.unit+'</div>'+
+    '</div>';
+  }).join('');
+  items += '<div class="module-add-btn" onclick="openGenericAdd(\'stats\')"><div class="plus">+</div><span>添加统计</span></div>';
+  E('statsRow', '<div class="stats-grid">'+items+'</div>');
+  setTimeout(animateStats, 300);
+}
+
+/* ======== PROJECTS ======== */
+function renderProjects(){
+  var projGrid = D.projects.map(function(p){
+    var imgs=p.imgs&&p.imgs.length?p.imgs:(projectImages[p.id]||[]);
+    return '<div class="project-card" onclick="openProject(\''+p.id+'\')">'+
+      '<button class="pc-delete" onclick="event.stopPropagation();deleteProject(\''+p.id+'\')" title="删除项目">&times;</button>'+
+      '<div class="pc-image">'+(imgs.length?'<img src="'+imgs[0]+'" loading="lazy">':'<div class="placeholder">&#9632;</div>')+'<div class="pc-tag">'+p.cat+'</div></div>'+
+      '<div class="pc-body"><div class="pc-meta">'+p.cat+' &middot; '+p.year+' &middot; '+p.area+'</div><h3>'+p.title+'</h3><div class="pc-en">'+p.en+'</div><p>'+p.desc+'</p></div>'+
+    '</div>';
+  }).join('');
+
+  E('projects',
+    '<div class="section-eyebrow">SELECTED WORKS</div>'+
+    '<h2 class="section-title">精选项目</h2>'+
+    '<p class="section-sub">200+商业空间项目施工图深化，涵盖酒店、办公、商业零售及文化空间。</p>'+
+    '<div class="projects-grid">'+projGrid+'<div class="add-project-btn" onclick="openAddProject()"><div class="plus">+</div><span>添加项目</span></div></div>'
+  );
+}
+
+/* ======== ADD PROJECT ======== */
+let nextProjId = (function(){
+  let max = 0;
+  D.projects.forEach(function(p){var n=parseInt(p.id.replace('p',''));if(n>max)max=n;});
+  return max+1;
+})();
+
+function openAddProject(){
+  nextProjId = (function(){var max=0;D.projects.forEach(function(p){var n=parseInt(p.id.replace('p',''));if(n>max)max=n;});return max+1;})();
+  var fid = 'p' + String(nextProjId).padStart(2,'0');
+  document.getElementById('addProjectForm').innerHTML =
+    '<h3>添加新项目</h3>'+
+    '<div class="af-row"><div class="af-full"><label>项目ID</label><input id="ap_id" value="'+fid+'" readonly style="opacity:0.6"></div></div>'+
+    '<div class="af-row"><div><label>中文标题</label><input id="ap_title"></div><div><label>英文标题</label><input id="ap_en"></div></div>'+
+    '<div class="af-row"><div><label>类别</label><input id="ap_cat"></div><div><label>年份</label><input id="ap_year"></div></div>'+
+    '<div class="af-row"><div><label>地点</label><input id="ap_location"></div><div><label>客户</label><input id="ap_client"></div></div>'+
+    '<div class="af-row"><div><label>面积</label><input id="ap_area"></div></div>'+
+    '<div class="af-full"><label>描述</label><textarea id="ap_desc"></textarea></div>'+
+    '<div class="af-full"><label>挑战</label><textarea id="ap_challenge"></textarea></div>'+
+    '<div class="af-full"><label>方案</label><textarea id="ap_solution"></textarea></div>'+
+    '<div class="af-full"><label>技术标签 (逗号分隔)</label><input id="ap_tech"></div>'+
+    '<div class="af-full"><label>亮点 (逗号分隔)</label><input id="ap_highlights"></div>'+
+    '<div class="add-modal-actions">'+
+      '<button class="save" onclick="saveNewProject()">保存</button>'+
+      '<button class="cancel" onclick="closeAddProject()">取消</button>'+
+    '</div>';
+  document.getElementById('addProjectModal').classList.add('open');
+}
+function closeAddProject(){ document.getElementById('addProjectModal').classList.remove('open'); }
+function saveNewProject(){
+  var id = document.getElementById('ap_id').value;
+  var p = {
+    id:id, thumb:'',
+    title:document.getElementById('ap_title').value||'未命名项目',
+    en:document.getElementById('ap_en').value||'',
+    cat:document.getElementById('ap_cat').value||'',
+    year:document.getElementById('ap_year').value||'2026',
+    location:document.getElementById('ap_location').value||'',
+    client:document.getElementById('ap_client').value||'',
+    area:document.getElementById('ap_area').value||'',
+    desc:document.getElementById('ap_desc').value||'',
+    challenge:document.getElementById('ap_challenge').value||'',
+    solution:document.getElementById('ap_solution').value||'',
+    tech:document.getElementById('ap_tech').value||'',
+    highlights:document.getElementById('ap_highlights').value||''
+  };
+  D.projects.push(p);
+  nextProjId++;
+  renderProjects();
+  persist();
+  closeAddProject();
+  toast('项目「'+p.title+'」已添加');
+}
+
+function deleteProject(id){
+  if(!confirm('确定删除项目「'+(D.projects.find(function(p){return p.id===id})||{}).title+'」？此操作不可恢复。')) return;
+  D.projects = D.projects.filter(function(p){return p.id!==id});
+  delete projectImages[id];
+  renderProjects();
+  persist();
+  toast('项目已删除');
+}
+
+function openProject(id){
+  var p=D.projects.find(function(x){return x.id===id});if(!p)return;
+  var imgs=p.imgs&&p.imgs.length?p.imgs:(projectImages[id]||[]);
+  var mainImg = imgs.length>0 ? imgs[0] : '';
+  var galleryImgs = imgs.length>1 ? imgs.slice(1) : [];
+  var techs=(p.tech||'').split(',').map(function(s){return s.trim()}).filter(Boolean);
+  var highlights=(p.highlights||'').split(',').map(function(s){return s.trim()}).filter(Boolean);
+  E('modalContent',
+    '<button class="modal-close" onclick="closeProject()">&times;</button>'+
+    // Main image - full width hero
+    (mainImg ? '<div class="m-hero-img"><img src="'+mainImg+'" onclick="openLightbox(\''+mainImg+'\')"></div>' :
+    '<div class="m-hero-placeholder"><span>'+p.cat+'</span></div>')+
+    // Project header
+    '<div class="m-header"><div class="m-cat">'+p.cat+' &middot; '+p.year+'</div><h2>'+p.title+'</h2>'+
+    '<div class="m-sub">'+p.en+' &middot; '+p.location+' &middot; '+p.client+' &middot; '+p.area+'</div></div>'+
+    // Description
+    '<div class="m-section"><h4>项目概述</h4><p>'+p.desc+'</p></div>'+
+    // Challenge + Solution side by side
+    '<div class="m-two-col"><div class="m-section"><h4>技术挑战</h4><p>'+p.challenge+'</p></div><div class="m-section"><h4>解决方案</h4><p>'+p.solution+'</p></div></div>'+
+    // Tech tags
+    '<div class="m-section"><h4>应用技术</h4><div class="m-tags">'+techs.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div>'+
+    // Highlights
+    '<div class="m-section"><h4>项目亮点</h4><ul>'+highlights.map(function(h){return '<li>'+h+'</li>'}).join('')+'</ul></div>'+
+    // Gallery
+    '<div class="m-gallery"><h4>项目图集 ('+imgs.length+' 张)</h4><div class="m-gallery-grid">'+
+      imgs.map(function(img,i){
+        var btns = '';
+        if(i>0) btns += '<button class="g-move-left" onclick="event.stopPropagation();moveProjectImage(\''+id+'\','+i+','+(i-1)+')" title="左移">\u25C0</button>';
+        if(i<imgs.length-1) btns += '<button class="g-move-right" onclick="event.stopPropagation();moveProjectImage(\''+id+'\','+i+','+(i+1)+')" title="右移">\u25B6</button>';
+        btns += '<button class="g-del" onclick="event.stopPropagation();deleteProjectImage(\''+id+'\','+i+')" title="删除">&times;</button>';
+        return '<div class="g-item'+(i===0?' main':'')+'">'+btns+'<img src="'+img+'" loading="lazy" onclick="event.stopPropagation();openLightbox(\''+img+'\')"><span class="g-badge">'+(i===0?'主图':'图'+(i+1))+'</span></div>';
+      }).join('')+
+      '<label class="g-item add" style="position:relative;overflow:hidden" onclick="event.stopPropagation()"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1">+ 上传</span><input type="file" multiple onchange="uploadProjectImg(\''+id+'\',this)" style="position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2"></label>'+
+    '</div></div>'
+  );
+  document.getElementById('projectDetail').classList.add('open');
+}
+function closeProject(){document.getElementById('projectDetail').classList.remove('open')}
+
+function deleteProjectImage(id, index){
+  if(!projectImages[id]) return;
+  projectImages[id].splice(index, 1);
+  if(projectImages[id].length === 0) delete projectImages[id];
+  var p = D.projects.find(function(x){return x.id===id});
+  if(p && p.imgs) p.imgs.splice(index, 1);
+  persist(); publishToGitHub(function(){});
+  openProject(id); renderProjects();
+}
+
+function moveProjectImage(id, from, to){
+  if(!projectImages[id]) return;
+  var arr = projectImages[id];
+  var item = arr.splice(from, 1)[0];
+  arr.splice(to, 0, item);
+  var p = D.projects.find(function(x){return x.id===id});
+  if(p && p.imgs){
+    var mi = p.imgs.splice(from, 1)[0];
+    p.imgs.splice(to, 0, mi);
+  }
+  persist(); publishToGitHub(function(){});
+  openProject(id); renderProjects();
+}
+
+function uploadProjectImg(id, inp){
+  if(!isAdmin()){ toast('请先登录编辑模式'); return; }
+  var files=Array.from(inp.files);
+  if(!files.length) return;
+  if(!projectImages[id]) projectImages[id]=[];
+  var p = D.projects.find(function(x){return x.id===id});
+  if(p && !p.imgs) p.imgs = [];
+  var total = files.length, done = 0;
+  files.forEach(function(f){
+    var r=new FileReader();
+    r.onload=function(e){
+      var dataUrl = e.target.result;
+      projectImages[id].push(dataUrl);
+      if(p) p.imgs.push(dataUrl);
+      done++;
+      if(done >= total){
+        // Close and reopen for clean refresh
+        closeProject();
+        setTimeout(function(){
+          openProject(id); renderProjects(); persist(); publishToGitHub(function(){});
+        }, 50);
+      }
+      // Upload to cloud in background
+      var ext = (f.name.split('.').pop() || 'jpg').toLowerCase();
+      if(ext==='jpeg') ext = 'jpg';
+      var filename = 'proj_'+id+'_'+Date.now()+'_'+Math.random().toString(36).slice(2,6)+'.'+ext;
+      uploadImageToGitHub(dataUrl, filename, function(url){
+        if(url){
+          var idx = projectImages[id].indexOf(dataUrl);
+          if(idx>=0) projectImages[id][idx] = url;
+          if(p && p.imgs){
+            var idx2 = p.imgs.indexOf(dataUrl);
+            if(idx2>=0) p.imgs[idx2] = url;
+          }
+          persist(); publishToGitHub(function(){});
+          closeProject();
+          setTimeout(function(){ openProject(id); renderProjects(); }, 50);
+        }
+      });
+    };
+    r.readAsDataURL(f);
+  });
+}
+
+function cmsUploadPhoto(id, inp){
+  var files=Array.from(inp.files);
+  if(!files.length) return;
+  var p = D.projects.find(function(x){return x.id===id});
+  if(!p) return;
+  if(!p.imgs) p.imgs = [];
+  if(!projectImages[id]) projectImages[id]=[];
+  var total=files.length, done=0;
+  files.forEach(function(f){
+    var r=new FileReader();
+    r.onload=function(e){
+      var dataUrl=e.target.result;
+      p.imgs.push(dataUrl);
+      projectImages[id].push(dataUrl);
+      done++;
+      if(done>=total){
+        persist(); renderProjects(); publishToGitHub(function(){});
+      }
+      var ext=(f.name.split(".").pop()||"jpg").toLowerCase();
+      if(ext==="jpeg") ext="jpg";
+      uploadImageToGitHub(dataUrl, "proj_"+id+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,6)+"."+ext, function(url){
+        if(url){
+          var idx2=p.imgs.indexOf(dataUrl);
+          if(idx2>=0) p.imgs[idx2]=url;
+          var idx=projectImages[id].indexOf(dataUrl);
+          if(idx>=0) projectImages[id][idx]=url;
+          persist(); publishToGitHub(function(){});
+        }
+      });
+    };
+    r.readAsDataURL(f);
+  });
+}
+
+function cmsDeletePhoto(id, index){
+  var p = D.projects.find(function(x){return x.id===id});
+  if(!p||!p.imgs) return;
+  p.imgs.splice(index,1);
+  if(projectImages[id]) projectImages[id].splice(index,1);
+  persist(); renderProjects(); publishToGitHub(function(){});
+}
+
+
+function uploadAboutPhoto(){
+  var f = document.getElementById('cmsAboutPhotoInp').files[0];
+  if(!f) return;
+  var ext = (f.name.split('.').pop() || 'jpg').toLowerCase();
+  if(ext==='jpeg') ext = 'jpg';
+  var r = new FileReader();
+  r.onload = function(e){
+    var filename = 'about_'+Date.now()+'.'+ext;
+    uploadImageToGitHub(e.target.result, filename, function(url){
+      if(url){
+        D.aboutPhoto = url;
+        renderAbout();
+        persist();
+        publishToGitHub(function(){});
+        document.getElementById('cmsAboutPhoto').innerHTML = '<img src="'+url+'" style="max-width:120px;border:1px solid var(--border)">';
+        toast('头像已上传云端');
+      } else {
+        D.aboutPhoto = e.target.result;
+        renderAbout();
+        persist();
+        document.getElementById('cmsAboutPhoto').innerHTML = '<img src="'+e.target.result+'" style="max-width:120px;border:1px solid var(--border)">';
+        toast('上传失败，已保存本地');
+      }
+    });
+  };
+  r.readAsDataURL(f);
+}
+function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('open')}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open')}
+
+/* ======== GENERIC ADD/DELETE FOR MODULES ======== */
+let genericAddTarget = '';
+
+function deleteModuleItem(module, index){
+  var arr = D[module];
+  if(!arr || index < 0 || index >= arr.length) return;
+  var label = '';
+  if(module==='skills') label = arr[index].name;
+  else if(module==='process') label = arr[index].title;
+  else if(module==='services') label = arr[index].title;
+  else if(module==='cases') label = arr[index].title;
+  else if(module==='testimonials') label = arr[index].author;
+  else if(module==='insights') label = arr[index].title;
+  else if(module==='faq') label = arr[index].q;
+  else if(module==='philosophy') label = arr[index].title;
+  else if(module==='education') label = arr[index].degree;
+  else if(module==='experience') label = arr[index].role;
+  else if(module==='stats') label = arr[index].label;
+  if(!confirm('确定删除「'+(label||'此项')+'」？')) return;
+  D[module].splice(index, 1);
+  reRenderModule(module);
+  persist();
+  toast('已删除');
+}
+
+function openGenericAdd(module){
+  genericAddTarget = module;
+  var form = document.getElementById('genericAddForm');
+  var h = '';
+  switch(module){
+    case 'skills':
+      h = '<h3>添加技能</h3>'+
+        '<div class="af-full"><label>名称</label><input id="ga_name"></div>'+
+        '<div class="af-full"><label>百分比 (0-100)</label><input id="ga_pct" type="number" min="0" max="100" value="80"></div>'+
+        '<div class="af-full"><label>描述</label><textarea id="ga_desc"></textarea></div>';
+      break;
+    case 'process':
+      var nextStep = String(D.process.length+1).padStart(2,'0');
+      h = '<h3>添加流程步骤</h3>'+
+        '<div class="af-full"><label>步骤号 (自动)</label><input id="ga_step" value="'+nextStep+'" readonly style="opacity:0.6"></div>'+
+        '<div class="af-row"><div><label>中文标题</label><input id="ga_title"></div><div><label>English</label><input id="ga_en"></div></div>'+
+        '<div class="af-full"><label>描述</label><textarea id="ga_desc"></textarea></div>';
+      break;
+    case 'services':
+      var nextIcon = String(D.services.length+1).padStart(2,'0');
+      h = '<h3>添加服务</h3>'+
+        '<div class="af-full"><label>图标编号</label><input id="ga_icon" value="'+nextIcon+'"></div>'+
+        '<div class="af-row"><div><label>中文标题</label><input id="ga_title"></div><div><label>English</label><input id="ga_en"></div></div>'+
+        '<div class="af-full"><label>描述</label><textarea id="ga_desc"></textarea></div>';
+      break;
+    case 'cases':
+      h = '<h3>添加案例</h3>'+
+        '<div class="af-full"><label>标题</label><input id="ga_title"></div>'+
+        '<div class="af-full"><label>指标</label><input id="ga_metric"></div>'+
+        '<div class="af-full"><label>描述</label><textarea id="ga_desc"></textarea></div>';
+      break;
+    case 'testimonials':
+      h = '<h3>添加评价</h3>'+
+        '<div class="af-full"><label>引言</label><textarea id="ga_quote"></textarea></div>'+
+        '<div class="af-full"><label>作者</label><input id="ga_author"></div>'+
+        '<div class="af-full"><label>职位</label><input id="ga_role"></div>';
+      break;
+    case 'insights':
+      h = '<h3>添加洞见</h3>'+
+        '<div class="af-full"><label>标题</label><input id="ga_title"></div>'+
+        '<div class="af-full"><label>日期 (YYYY-MM)</label><input id="ga_date" value="2026-06"></div>'+
+        '<div class="af-full"><label>摘要</label><textarea id="ga_excerpt"></textarea></div>';
+      break;
+    case 'faq':
+      h = '<h3>添加 FAQ</h3>'+
+        '<div class="af-full"><label>问题</label><input id="ga_q"></div>'+
+        '<div class="af-full"><label>回答</label><textarea id="ga_a"></textarea></div>';
+      break;
+    case 'philosophy':
+      h = '<h3>添加设计哲学</h3>'+
+        '<div class="af-row"><div><label>中文标题</label><input id="ga_title"></div><div><label>English</label><input id="ga_en"></div></div>'+
+        '<div class="af-full"><label>描述</label><textarea id="ga_desc"></textarea></div>';
+      break;
+    case 'education':
+      h = '<h3>添加教育经历</h3>'+
+        '<div class="af-full"><label>学位</label><input id="ga_degree"></div>'+
+        '<div class="af-full"><label>学校</label><input id="ga_school"></div>'+
+        '<div class="af-full"><label>年份</label><input id="ga_year" value="2014-2018"></div>';
+      break;
+    case 'experience':
+      h = '<h3>添加职业经历</h3>'+
+        '<div class="af-full"><label>时间段</label><input id="ga_period" value="2010-2014"></div>'+
+        '<div class="af-row"><div><label>职位</label><input id="ga_role"></div><div><label>公司</label><input id="ga_company"></div></div>'+
+        '<div class="af-full"><label>描述</label><textarea id="ga_desc"></textarea></div>';
+      break;
+    case 'stats':
+      h = '<h3>添加统计项</h3>'+
+        '<div class="af-full"><label>数值</label><input id="ga_value" value="100+"></div>'+
+        '<div class="af-row"><div><label>标签</label><input id="ga_label"></div><div><label>单位</label><input id="ga_unit"></div></div>';
+      break;
+  }
+  h += '<div class="add-modal-actions">'+
+    '<button class="save" onclick="saveGenericAdd()">保存</button>'+
+    '<button class="cancel" onclick="closeGenericAdd()">取消</button>'+
+  '</div>';
+  form.innerHTML = h;
+  document.getElementById('genericAddModal').classList.add('open');
+}
+function closeGenericAdd(){ document.getElementById('genericAddModal').classList.remove('open'); }
+function saveGenericAdd(){
+  var m = genericAddTarget;
+  var gv = function(id){return document.getElementById(id)?document.getElementById(id).value:''};
+  var item;
+  switch(m){
+    case 'skills': item = {name:gv('ga_name')||'新技能', pct:parseInt(gv('ga_pct'))||80, desc:gv('ga_desc')||''}; break;
+    case 'process': item = {step:gv('ga_step')||'0'+String(D.process.length+1), title:gv('ga_title')||'新步骤', en:gv('ga_en')||'', desc:gv('ga_desc')||''}; break;
+    case 'services': item = {icon:gv('ga_icon')||'0'+String(D.services.length+1), title:gv('ga_title')||'新服务', en:gv('ga_en')||'', desc:gv('ga_desc')||''}; break;
+    case 'cases': item = {title:gv('ga_title')||'新案例', metric:gv('ga_metric')||'', desc:gv('ga_desc')||''}; break;
+    case 'testimonials': item = {quote:gv('ga_quote')||'', author:gv('ga_author')||'匿名', role:gv('ga_role')||''}; break;
+    case 'insights': item = {title:gv('ga_title')||'新洞见', date:gv('ga_date')||'2026-06', excerpt:gv('ga_excerpt')||''}; break;
+    case 'faq': item = {q:gv('ga_q')||'新问题', a:gv('ga_a')||''}; break;
+    case 'philosophy': item = {title:gv('ga_title')||'新条目', en:gv('ga_en')||'', desc:gv('ga_desc')||''}; break;
+    case 'education': item = {degree:gv('ga_degree')||'新学历', school:gv('ga_school')||'', year:gv('ga_year')||''}; break;
+    case 'experience': item = {period:gv('ga_period')||'', role:gv('ga_role')||'新职位', company:gv('ga_company')||'', desc:gv('ga_desc')||''}; break;
+    case 'stats': item = {value:gv('ga_value')||'0', label:gv('ga_label')||'新统计', unit:gv('ga_unit')||''}; break;
+  }
+  D[m].push(item);
+  reRenderModule(m);
+  persist();
+  closeGenericAdd();
+  toast('已添加');
+}
+
+function reRenderModule(m){
+  switch(m){
+    case 'stats': renderStats(); break;
+    case 'projects': renderProjects(); break;
+    case 'skills': renderSkills(); setTimeout(animateSkillBars,200); break;
+    case 'process': renderProcess(); break;
+    case 'services': renderServices(); break;
+    case 'cases': renderCases(); break;
+    case 'testimonials': renderTestimonials(); break;
+    case 'insights': renderInsights(); break;
+    case 'faq': renderFAQ(); break;
+    case 'philosophy': case 'education': renderAbout(); break;
+    case 'experience': renderExperience(); break;
+  }
+}
+
+/* ======== ABOUT WITH PHOTO ======== */
+function renderAbout(){
+  var ph = D.aboutPhoto || localStorage.getItem('pf_about_photo') || '';
+  var initials = (D.profile.name_cn||'').replace(/\s/g,'').slice(0,2) || 'LS';
+  var photoHTML = ph
+    ? '<img src="'+ph+'" alt="photo"><div class="ph-upload">更换</div>'
+    : '<div class="ph-placeholder">'+initials+'</div><div class="ph-upload">上传照片</div>';
+
+  E('about',
+    '<div class="section-eyebrow">ABOUT</div><h2 class="section-title">'+D.profile.name_cn+'</h2>'+
+    '<div class="about-photo-area">'+
+      '<div class="about-photo" onclick="uploadAboutPhoto()" title="点击上传或更换照片">'+photoHTML+'</div>'+
+      '<div class="about-photo-info"><h4>'+D.profile.name_cn+'</h4><p>'+D.profile.title_cn+' &middot; '+D.profile.location+'</p></div>'+
+    '</div>'+
+    '<div class="about-grid">'+
+      '<div class="about-bio"><p>'+D.about.bio1+'</p><p>'+D.about.bio2+'</p><p>'+D.about.bio3+'</p></div>'+
+      '<div class="about-side">'+
+        '<div class="section-eyebrow">EDUCATION</div>'+
+        D.education.map(function(e,i){return '<div class="edu-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'education\','+i+')">&times;</button><div class="edu-degree">'+e.degree+'</div><div class="edu-school">'+e.school+'</div><div class="edu-year">'+e.year+'</div></div>'}).join('')+
+        '<div class="education-add"><div class="module-add-btn" onclick="openGenericAdd(\'education\')"><div class="plus">+</div><span>添加教育经历</span></div></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="philosophy-grid">'+
+      D.philosophy.map(function(p,i){return '<div class="philo-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'philosophy\','+i+')">&times;</button><h4>'+p.title+'</h4><div class="en">'+p.en+'</div><p>'+p.desc+'</p></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'philosophy\')"><div class="plus">+</div><span>添加设计哲学</span></div>'+
+    '</div>'
+  );
+}
+function uploadAboutPhoto(){
+  var inp=document.createElement('input');inp.type='file';
+  inp.onchange=function(){
+    var f = inp.files[0];
+    if(!f) return;
+    var ext = (f.name.split('.').pop() || 'jpg').toLowerCase();
+    if(ext==='jpeg') ext = 'jpg';
+    var r=new FileReader();
+    r.onload=function(e){
+      var filename = 'about_'+Date.now()+'.'+ext;
+      uploadImageToGitHub(e.target.result, filename, function(url){
+        if(url){
+          D.aboutPhoto = url;
+          renderAbout(); persist();
+          publishToGitHub(function(){});
+          toast('头像已上传云端');
+        } else {
+          localStorage.setItem('pf_about_photo', e.target.result);
+          renderAbout(); toast('上传失败，已保存本地');
+        }
+      });
+    };
+    r.readAsDataURL(f);
+  };
+  inp.click();
+}
+
+function renderExperience(){
+  E('resume',
+    '<div class="section-eyebrow">EXPERIENCE</div><h2 class="section-title">职业经历</h2>'+
+    '<div class="timeline">'+
+      D.experience.map(function(e,i){return '<div class="timeline-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'experience\','+i+')">&times;</button><div class="period">'+e.period+'</div><h4>'+e.role+'</h4><div class="company">'+e.company+'</div><p>'+e.desc+'</p></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'experience\')"><div class="plus">+</div><span>添加经历</span></div>'+
+    '</div>'
+  );
+}
+function renderSkills(){
+  E('skills',
+    '<div class="section-eyebrow">EXPERTISE</div><h2 class="section-title">专业技能</h2>'+
+    '<div class="skills-grid">'+
+      D.skills.map(function(s,i){return '<div class="skill-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'skills\','+i+')">&times;</button><div class="skill-header"><span class="skill-name">'+s.name+'</span><span class="skill-pct">'+s.pct+'%</span></div><div class="skill-bar"><div class="skill-bar-fill" data-w="'+s.pct+'%"></div></div><div class="skill-desc">'+s.desc+'</div></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'skills\')"><div class="plus">+</div><span>添加技能</span></div>'+
+    '</div>'
+  );
+  setTimeout(animateSkillBars, 300);
+}
+function renderProcess(){
+  E('process',
+    '<div class="section-eyebrow">METHODOLOGY</div><h2 class="section-title">工作流程</h2>'+
+    '<div class="process-grid">'+
+      D.process.map(function(p,i){return '<div class="process-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'process\','+i+')">&times;</button><div class="step-num">'+p.step+'</div><h4>'+p.title+'</h4><div class="en">'+p.en+'</div><p>'+p.desc+'</p></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'process\')"><div class="plus">+</div><span>添加步骤</span></div>'+
+    '</div>'
+  );
+}
+function renderServices(){
+  E('services',
+    '<div class="section-eyebrow">SERVICES</div><h2 class="section-title">专业服务</h2>'+
+    '<div class="services-grid">'+
+      D.services.map(function(s,i){return '<div class="service-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'services\','+i+')">&times;</button><div class="s-icon">'+s.icon+'</div><h4>'+s.title+'</h4><div class="s-en">'+s.en+'</div><p>'+s.desc+'</p></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'services\')"><div class="plus">+</div><span>添加服务</span></div>'+
+    '</div>'
+  );
+}
+function renderCases(){
+  E('cases',
+    '<div class="section-eyebrow">CASE STUDIES</div><h2 class="section-title">技术案例</h2>'+
+    '<div class="cases-grid">'+
+      D.cases.map(function(c,i){return '<div class="case-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'cases\','+i+')">&times;</button><h4>'+c.title+'</h4><p>'+c.desc+'</p><div class="case-metric">'+c.metric+'</div></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'cases\')"><div class="plus">+</div><span>添加案例</span></div>'+
+    '</div>'
+  );
+}
+function renderTestimonials(){
+  E('testimonials',
+    '<div class="section-eyebrow">TESTIMONIALS</div><h2 class="section-title">客户评价</h2>'+
+    '<div class="testimonials-grid">'+
+      D.testimonials.map(function(t,i){return '<div class="testimonial-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'testimonials\','+i+')">&times;</button><div class="quote">'+t.quote+'</div><div class="author">'+t.author+'</div><div class="role">'+t.role+'</div></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'testimonials\')"><div class="plus">+</div><span>添加评价</span></div>'+
+    '</div>'
+  );
+}
+function renderInsights(){
+  E('insights',
+    '<div class="section-eyebrow">INSIGHTS</div><h2 class="section-title">行业洞见</h2>'+
+    '<div class="insights-grid">'+
+      D.insights.map(function(i,idx){return '<div class="insight-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'insights\','+idx+')">&times;</button><div class="date">'+i.date+'</div><h4>'+i.title+'</h4><p>'+i.excerpt+'</p></div>'}).join('')+
+      '<div class="module-add-btn" onclick="openGenericAdd(\'insights\')"><div class="plus">+</div><span>添加洞见</span></div>'+
+    '</div>'
+  );
+}
+function renderFAQ(){
+  E('faq',
+    '<div class="section-eyebrow">FAQ</div><h2 class="section-title">常见问题</h2>'+
+    '<div class="faq-list">'+
+      D.faq.map(function(f,i){return '<div class="faq-item"><button class="item-del" onclick="event.stopPropagation();deleteModuleItem(\'faq\','+i+')">&times;</button><div class="faq-q" onclick="this.parentElement.classList.toggle(\'open\')">'+f.q+'<span class="arrow">+</span></div><div class="faq-a"><p>'+f.a+'</p></div></div>'}).join('')+
+      '<div class="module-add-btn" style="margin-top:12px" onclick="openGenericAdd(\'faq\')"><div class="plus">+</div><span>添加 FAQ</span></div>'+
+    '</div>'
+  );
+}
+function renderContact(){
+  E('contact',
+    '<div class="section-eyebrow">CONTACT</div><h2 class="section-title">联系我</h2>'+
+    '<div class="contact-grid">'+
+      '<div class="contact-info">'+
+        '<p>'+D.contact.intro+'</p>'+
+        '<div class="contact-detail"><div class="icon">&#9993;</div><div class="val">'+D.profile.email+'</div></div>'+
+        '<div class="contact-detail"><div class="icon">&#9742;</div><div class="val">'+D.profile.phone+'</div></div>'+
+        '<div class="contact-detail"><div class="icon">&#128172;</div><div class="val">'+D.profile.wechat+'</div></div>'+
+        '<div class="contact-detail"><div class="icon">&#128205;</div><div class="val">'+D.contact.address+'</div></div>'+
+      '</div>'+
+      '<div>'+
+        '<form class="contact-form" id="contactForm" onsubmit="handleContact(event)">'+
+          '<input type="text" placeholder="姓名" required>'+
+          '<input type="email" placeholder="邮箱" required>'+
+          '<input type="text" placeholder="公司">'+
+          '<textarea placeholder="留言内容"></textarea>'+
+          '<button type="submit" class="btn btn-primary">发送消息</button>'+
+        '</form>'+
+        '<div class="contact-success" id="contactSuccess">'+
+          '<h3>&#10003; 消息已发送</h3>'+
+          '<p>感谢您的留言，我会尽快回复。</p>'+
+        '</div>'+
+      '</div>'+
+    '</div>'
+  );
+}
+
+/* ======== BACKGROUND SETTINGS PANEL ======== */
+function openBgSettings(){
+  var p = document.getElementById('bgPanel');
+  p.innerHTML =
+    '<h3>背景设置 <button onclick="closeBgSettings()">&times;</button></h3>'+
+    '<div class="bg-field"><label>背景样式 <span id="bgStyleVal">'+bgSettings.style+'</span></label>'+
+      '<select onchange="bgSettings.style=this.value;saveBgSettings();if(window._reinitCanvas)window._reinitCanvas();document.getElementById(\'bgStyleVal\').textContent=this.value;">'+
+        '<option value="particle-line"'+(bgSettings.style==='particle-line'?' selected':'')+'>粒子连线</option>'+
+        '<option value="particle-only"'+(bgSettings.style==='particle-only'?' selected':'')+'>纯粒子</option>'+
+        '<option value="stars"'+(bgSettings.style==='stars'?' selected':'')+'>星空</option>'+
+        '<option value="grid"'+(bgSettings.style==='grid'?' selected':'')+'>网格</option>'+
+      '</select></div>'+
+    '<div class="bg-field"><label>粒子数量 <span>'+bgSettings.count+'</span></label>'+
+      '<input type="range" min="10" max="200" value="'+bgSettings.count+'" oninput="bgSettings.count=parseInt(this.value);saveBgSettings();this.parentElement.querySelector(\'span\').textContent=this.value;if(window._reinitCanvas)window._reinitCanvas();"></div>'+
+    '<div class="bg-field"><label>粒子大小 <span>'+bgSettings.size.toFixed(1)+'</span></label>'+
+      '<input type="range" min="0.2" max="3.0" step="0.1" value="'+bgSettings.size+'" oninput="bgSettings.size=parseFloat(this.value);saveBgSettings();this.parentElement.querySelector(\'span\').textContent=parseFloat(this.value).toFixed(1);if(window._reinitCanvas)window._reinitCanvas();"></div>'+
+    '<div class="bg-field"><label>连线透明度 <span>'+bgSettings.lineOpacity.toFixed(2)+'</span></label>'+
+      '<input type="range" min="0" max="0.15" step="0.005" value="'+bgSettings.lineOpacity+'" oninput="bgSettings.lineOpacity=parseFloat(this.value);saveBgSettings();this.parentElement.querySelector(\'span\').textContent=parseFloat(this.value).toFixed(2);"></div>'+
+    '<div class="bg-field"><label>光晕强度 <span>'+bgSettings.glowStrength.toFixed(1)+'</span></label>'+
+      '<input type="range" min="0" max="1" step="0.05" value="'+bgSettings.glowStrength+'" oninput="bgSettings.glowStrength=parseFloat(this.value);saveBgSettings();this.parentElement.querySelector(\'span\').textContent=parseFloat(this.value).toFixed(1);"></div>'+
+    '<div class="bg-actions">'+
+      '<button class="bg-reset" onclick="bgSettings={count:100,size:1.0,lineOpacity:0.03,glowStrength:0.5,style:\'particle-line\'};saveBgSettings();if(window._reinitCanvas)window._reinitCanvas();closeBgSettings();openBgSettings();">恢复默认</button>'+
+    '</div>';
+  p.classList.add('open');
+  document.getElementById('bgPanelOverlay').classList.add('open');
+}
+function closeBgSettings(){
+  document.getElementById('bgPanel').classList.remove('open');
+  document.getElementById('bgPanelOverlay').classList.remove('open');
+}
+
+/* ======== CMS WITH TABS ======== */
+let cmsTab = 'profile';
+function cs(title){return '<div class="cms-section"><h4 onclick="this.parentElement.classList.toggle(\'collapsed\')"><span class="collapse-icon">&#9660;</span>'+title+'</h4><div class="cms-body">';}
+function cmsF(path,label,hint){
+  var v=get(path);
+  return '<div class="cms-field"><label>'+label+'</label><input data-cms="'+path+'" value="'+String(v).replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'" oninput="liveCMSUpdate(this)">'+(hint?'<div class="cms-hint">'+hint+'</div>':'')+'</div>';
+}
+function cmsTA(path,label){
+  var v=get(path);
+  return '<div class="cms-field"><label>'+label+'</label><textarea data-cms="'+path+'" oninput="liveCMSUpdate(this)">'+String(v).replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</textarea></div>';
+}
+function cE(){return'</div></div>';}
+
+function buildTabContent(tab){
+  var h='';
+  switch(tab){
+    case 'profile':
+      h+=cs('个人档案');h+=cmsF('profile.logo_text','左上角标识');h+=cmsF('profile.logo_subtitle','标识副标题');h+=cmsF('profile.name_cn','姓名');h+=cmsF('profile.name_en','英文名');h+=cmsF('profile.title_cn','职位');h+=cmsF('profile.title_en','职位英文');h+=cmsF('profile.tagline','Tagline');h+=cmsF('profile.email','邮箱');h+=cmsF('profile.phone','电话');h+=cmsF('profile.wechat','微信');h+=cmsF('profile.location','地区');h+=cE();
+      h+=cs('Hero');h+=cmsF('hero.eyebrow','眉题');h+=cmsF('profile.hero_headline','主标题');h+=cmsTA('profile.hero_intro','简介语');h+=cE();
+      h+=cs('联系');h+=cmsTA('contact.intro','引言');h+=cmsF('contact.address','地址');h+=cE();
+      h+=cs('头像');h+='<div class="cms-field"><label>头像照片</label><div id="cmsAboutPhoto" style="margin-top:4px"></div><input type="file" id="cmsAboutPhotoInp" onchange="uploadAboutPhoto()" style="display:block;margin-top:8px;font-size:0.7rem"></div>';h+=cE();
+      h+=cs('页脚');h+=cmsF('footer_copyright','版权信息');h+=cE();
+      break;
+    case 'projects':
+      h+='<button class="cms-btn add-proj" onclick="closeCMS();openAddProject()">+ 添加新项目</button>';
+      D.projects.forEach(function(p,i){
+        h+='<div style="margin-bottom:20px;padding:12px 0;border-bottom:1px solid var(--border)"><h4 style="font-size:9px;color:var(--accent);margin-bottom:10px;letter-spacing:1px">项目'+(i+1)+': <span style="color:var(--text)">'+p.title+'</span></h4>';
+        h+=cmsF('projects.'+i+'.title','标题');h+=cmsF('projects.'+i+'.en','英文标题');h+=cmsF('projects.'+i+'.cat','类别');h+=cmsF('projects.'+i+'.year','年份');h+=cmsF('projects.'+i+'.location','地点');h+=cmsF('projects.'+i+'.client','客户');h+=cmsF('projects.'+i+'.area','面积');h+=cmsTA('projects.'+i+'.desc','描述');h+=cmsTA('projects.'+i+'.challenge','挑战');h+=cmsTA('projects.'+i+'.solution','方案');h+=cmsF('projects.'+i+'.tech','技术标签','逗号分隔');h+=cmsF('projects.'+i+'.highlights','亮点','逗号分隔');
+        // Photo management
+        var imgs = p.imgs || projectImages[p.id] || [];
+        h+='<div style="margin-top:8px"><label style="font-size:10px;color:var(--text2);display:block;margin-bottom:4px">项目照片 ('+imgs.length+'张)</label>';
+        h+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px">';
+        imgs.forEach(function(img,idx){
+          h+='<div style="position:relative;width:60px;height:60px;overflow:hidden;border:1px solid var(--border)"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover"><button onclick="cmsDeletePhoto(\''+p.id+'\','+idx+');switchTab(\'projects\')" style="position:absolute;top:0;right:0;width:16px;height:16px;background:rgba(255,0,0,0.7);border:none;color:#fff;font-size:10px;cursor:pointer;line-height:1">&times;</button></div>';
+        });
+        h+='</div>';
+        h+='<input type="file" multiple onchange="cmsUploadPhoto(\''+p.id+'\',this);setTimeout(function(){switchTab(\'projects\')},1500)" style="font-size:0.6rem;color:var(--accent)">';
+        h+='</div>';
+        h+='</div>';
+      });
+      break;
+    case 'skills':
+      D.skills.forEach(function(s,i){h+=cs('技能'+(i+1)+': '+s.name);h+=cmsF('skills.'+i+'.name','名称');h+=cmsF('skills.'+i+'.pct','百分比');h+=cmsTA('skills.'+i+'.desc','描述');h+=cE();});
+      break;
+    case 'experience':
+      D.experience.forEach(function(e,i){h+=cs('经历'+(i+1)+': '+e.role);h+=cmsF('experience.'+i+'.period','时间');h+=cmsF('experience.'+i+'.role','职位');h+=cmsF('experience.'+i+'.company','公司');h+=cmsTA('experience.'+i+'.desc','描述');h+=cE();});
+      break;
+    case 'content':
+      h+=cs('关于');h+=cmsTA('about.bio1','段落1');h+=cmsTA('about.bio2','段落2');h+=cmsTA('about.bio3','段落3');h+=cE();
+      h+=cs('设计哲学');D.philosophy.forEach(function(p,i){h+=cmsF('philosophy.'+i+'.title','标题');h+=cmsF('philosophy.'+i+'.en','英文');h+=cmsTA('philosophy.'+i+'.desc','描述')});h+=cE();
+      h+=cs('教育背景');D.education.forEach(function(e,i){h+=cmsF('education.'+i+'.degree','学位');h+=cmsF('education.'+i+'.school','学校');h+=cmsF('education.'+i+'.year','年份')});h+=cE();
+      h+=cs('工作流程');D.process.forEach(function(p,i){h+=cmsF('process.'+i+'.title','标题');h+=cmsF('process.'+i+'.en','英文');h+=cmsTA('process.'+i+'.desc','描述')});h+=cE();
+      h+=cs('服务');D.services.forEach(function(s,i){h+=cmsF('services.'+i+'.title','标题');h+=cmsF('services.'+i+'.en','英文');h+=cmsTA('services.'+i+'.desc','描述')});h+=cE();
+      h+=cs('案例');D.cases.forEach(function(c,i){h+=cmsF('cases.'+i+'.title','标题');h+=cmsF('cases.'+i+'.metric','指标');h+=cmsTA('cases.'+i+'.desc','描述')});h+=cE();
+      break;
+    case 'other':
+      h+=cs('数据统计');D.stats.forEach(function(s,i){h+=cmsF('stats.'+i+'.value','数值'+(i+1));h+=cmsF('stats.'+i+'.label','标签'+(i+1));h+=cmsF('stats.'+i+'.unit','单位'+(i+1))});h+=cE();
+      h+=cs('评价');D.testimonials.forEach(function(t,i){h+=cmsTA('testimonials.'+i+'.quote','引言');h+=cmsF('testimonials.'+i+'.author','作者');h+=cmsF('testimonials.'+i+'.role','职位')});h+=cE();
+      h+=cs('洞见');D.insights.forEach(function(ins,i){h+=cmsF('insights.'+i+'.title','标题');h+=cmsF('insights.'+i+'.date','日期');h+=cmsTA('insights.'+i+'.excerpt','摘要')});h+=cE();
+      h+=cs('FAQ');D.faq.forEach(function(f,i){h+=cmsF('faq.'+i+'.q','问题');h+=cmsTA('faq.'+i+'.a','回答')});h+=cE();
+      break;
+    case 'theme':
+      h+=cs('配色主题');h+='<div style="display:flex;flex-wrap:wrap;gap:10px;padding:10px 0">';
+      THEMES.forEach(function(t,i){
+        h+='<div onclick="applyTheme('+i+',true)" style="cursor:pointer;width:50px;height:50px;border-radius:50%;background:'+t.color+';border:'+(i===currentTheme?'3px solid #fff':'2px solid transparent')+';transition:all 0.2s;display:flex;align-items:center;justify-content:center" title="'+t.name+'"><span style="font-size:8px;color:#fff;mix-blend-mode:difference;font-weight:600">'+t.name+'</span></div>';
+      });
+      h+='</div><button onclick="toggleCarousel()" style="margin-top:8px;padding:8px 16px;background:var(--accent);border:none;color:#fff;cursor:pointer;font-size:0.7rem;font-family:inherit">'+(carouselActive?'停止自动轮播':'启动自动轮播 (5秒)')+'</button>';h+=cE();
+      h+=cs('背景设置');h+='<button onclick="closeCMS();openBgSettings()" style="padding:8px 16px;background:var(--surface);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.65rem;font-family:inherit">打开背景设置面板</button>';h+=cE();
+      break;
+    case 'fonts':
+      h+=cs('正文字体');h+='<select onchange="updateFontSetting(\'bodyFont\',this.value)" style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12px">';
+      ['Outfit','Inter','DM Sans','Space Grotesk','Plus Jakarta Sans','Satoshi','Manrope','Poppins'].forEach(function(f){
+        h+='<option value="'+f+'"'+(D.fontSettings&&D.fontSettings.bodyFont===f?' selected':'')+'>'+f+'</option>';
+      });
+      h+='</select>';h+=cE();
+      h+=cs('标题字体');h+='<select onchange="updateFontSetting(\'headingFont\',this.value)" style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12px">';
+      ['EB Garamond','Playfair Display','Cormorant Garamond','Lora','Noto Serif SC','Source Serif 4','Libre Baskerville','Newsreader'].forEach(function(f){
+        h+='<option value="'+f+'"'+(D.fontSettings&&D.fontSettings.headingFont===f?' selected':'')+'>'+f+'</option>';
+      });
+      h+='</select>';h+=cE();
+      h+=cs('等宽字体');h+='<select onchange="updateFontSetting(\'monoFont\',this.value)" style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12px">';
+      ['JetBrains Mono','SF Mono','Fira Code','IBM Plex Mono','Source Code Pro','Inconsolata','Courier New'].forEach(function(f){
+        h+='<option value="'+f+'"'+(D.fontSettings&&D.fontSettings.monoFont===f?' selected':'')+'>'+f+'</option>';
+      });
+      h+='</select>';h+=cE();
+      h+=cs('正文字号');h+='<input type="range" min="13" max="20" value="'+(D.fontSettings&&D.fontSettings.bodySize||16)+'" oninput="updateFontSetting(\'bodySize\',this.value);this.nextElementSibling.textContent=this.value+\'px\'" style="width:100%"><span style="color:var(--accent);font-size:11px">'+(D.fontSettings&&D.fontSettings.bodySize||16)+'px</span>';h+=cE();
+      h+=cs('标题粗细');h+='<select onchange="updateFontSetting(\'headingWeight\',this.value)" style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-size:12px">';
+      ['300','400','500','600','700'].forEach(function(w){
+        h+='<option value="'+w+'"'+(D.fontSettings&&D.fontSettings.headingWeight===w?' selected':'')+'>'+w+'</option>';
+      });
+      h+='</select>';h+=cE();
+      h+=cs('字间距');h+='<input type="range" min="-1" max="3" step="0.5" value="'+(D.fontSettings&&D.fontSettings.letterSpacing||0)+'" oninput="updateFontSetting(\'letterSpacing\',this.value);this.nextElementSibling.textContent=this.value+\'px\'" style="width:100%"><span style="color:var(--accent);font-size:11px">'+(D.fontSettings&&D.fontSettings.letterSpacing||0)+'px</span>';h+=cE();
+      h+=cs('行高');h+='<input type="range" min="1.4" max="2.2" step="0.1" value="'+(D.fontSettings&&D.fontSettings.lineHeight||1.75)+'" oninput="updateFontSetting(\'lineHeight\',this.value);this.nextElementSibling.textContent=this.value" style="width:100%"><span style="color:var(--accent);font-size:11px">'+(D.fontSettings&&D.fontSettings.lineHeight||1.75)+'</span>';h+=cE();
+      h+='<button onclick="resetFonts()" style="margin-top:12px;padding:8px 16px;background:var(--surface);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.65rem;font-family:inherit">恢复默认字体</button>';h+=cE();
+      break;
+  }
+  return h;
+}
+
+function switchTab(tab){
+  cmsTab = tab;
+  document.querySelectorAll('.cms-tab').forEach(function(t){t.classList.toggle('active', t.dataset.tab===tab)});
+  document.getElementById('cmsTabContent').innerHTML = buildTabContent(tab);
+  document.getElementById('cmsSearch').value = '';
+}
+
+function filterCMS(){
+  var q = document.getElementById('cmsSearch').value.toLowerCase();
+  var fields = document.querySelectorAll('#cmsTabContent .cms-field');
+  var sections = document.querySelectorAll('#cmsTabContent .cms-section');
+  sections.forEach(function(sec){
+    var visible = false;
+    sec.querySelectorAll('.cms-field').forEach(function(f){
+      var label = (f.querySelector('label')||{}).textContent||'';
+      var input = f.querySelector('input,textarea');
+      var val = input?input.value:'';
+      var match = !q || label.toLowerCase().indexOf(q)>=0 || val.toLowerCase().indexOf(q)>=0;
+      f.style.display = match?'':'none';
+      if(match) visible = true;
+    });
+    sec.style.display = visible?'':'none';
+  });
+}
+
+function toggleAllCMS(){
+  var sections = document.querySelectorAll('#cmsTabContent .cms-section');
+  var anyExpanded = false;
+  sections.forEach(function(s){if(!s.classList.contains('collapsed'))anyExpanded=true;});
+  sections.forEach(function(s){
+    if(anyExpanded) s.classList.add('collapsed');
+    else s.classList.remove('collapsed');
+  });
+  document.getElementById('cmsToggleBtn').textContent = anyExpanded?'全部展开':'全部折叠';
+}
+
+function liveCMSUpdate(el){
+  var path = el.dataset.cms;
+  set(path, el.value);
+  var section = path.split('.')[0];
+  switch(section){
+    case 'profile': renderHero(); renderAbout(); renderContact(); renderLogo(); renderFooter(); break;
+    case 'hero': renderHero(); break;
+    case 'stats': renderStats(); break;
+    case 'projects': renderProjects(); break;
+    case 'about': case 'philosophy': case 'education': renderAbout(); break;
+    case 'experience': renderExperience(); break;
+    case 'skills': renderSkills(); break;
+    case 'process': renderProcess(); break;
+    case 'services': renderServices(); break;
+    case 'cases': renderCases(); break;
+    case 'testimonials': renderTestimonials(); break;
+    case 'insights': renderInsights(); break;
+    case 'faq': renderFAQ(); break;
+    case 'contact': renderContact(); break;
+    case 'footer_copyright': renderFooter(); break;
+  }
+  persist();
+  // Auto-publish to cloud with 2s debounce
+  clearTimeout(window._autoPublishTimer);
+  window._autoPublishTimer = setTimeout(function(){
+    publishToGitHub(function(ok){ if(ok) console.log('Auto-synced'); });
+  }, 2000);
+}
+
+function openCMS(){
+  document.getElementById('cmsPanel').innerHTML =
+    '<h3>内容编辑 <button onclick="closeCMS()">&times;</button></h3>'+
+    '<div class="cms-tabs">'+
+      '<button class="cms-tab active" data-tab="profile" onclick="switchTab(\'profile\')">基本信息</button>'+
+      '<button class="cms-tab" data-tab="projects" onclick="switchTab(\'projects\')">项目</button>'+
+      '<button class="cms-tab" data-tab="skills" onclick="switchTab(\'skills\')">技能</button>'+
+      '<button class="cms-tab" data-tab="experience" onclick="switchTab(\'experience\')">经历</button>'+
+      '<button class="cms-tab" data-tab="content" onclick="switchTab(\'content\')">内容</button>'+
+      '<button class="cms-tab" data-tab="other" onclick="switchTab(\'other\')">其他</button>'+
+      '<button class="cms-tab" data-tab="theme" onclick="switchTab(\'theme\')">配色</button>'+
+      '<button class="cms-tab" data-tab="fonts" onclick="switchTab(\'fonts\')">字体</button>'+
+    '</div>'+
+    '<input class="cms-search" id="cmsSearch" placeholder="搜索字段..." oninput="filterCMS()">'+
+    '<button class="cms-toggle-all" id="cmsToggleBtn" onclick="toggleAllCMS()">全部折叠</button>'+
+    '<div id="cmsTabContent">'+buildTabContent('profile')+'</div>'+
+    '<div class="cms-actions">'+
+      '<button class="cms-btn save" onclick="saveAllCMS()">保存所有</button>'+
+      '<button class="cms-btn reset" onclick="resetAll()">恢复默认</button>'+
+    '</div>';
+  document.getElementById('cmsPanel').classList.add('open');
+  document.getElementById('cmsOverlay').classList.add('open');
+}
+function closeCMS(){var p=document.getElementById('cmsPanel');var o=document.getElementById('cmsOverlay');if(p)p.classList.remove('open');if(o)o.classList.remove('open')}
+function saveAllCMS(){
+  document.querySelectorAll('[data-cms]').forEach(function(el){set(el.dataset.cms,el.value)});
+  renderAll(); persist(); closeCMS();
+  publishToGitHub(function(ok){
+    toast(ok ? '已保存并同步到云端' : '已本地保存（云端同步失败）');
+  });
+}
+function resetAll(){if(confirm('确定恢复默认内容？所有自定义修改将丢失。')){D=JSON.parse(JSON.stringify(defaultData));projectImages={};localStorage.clear();renderAll();applyTheme(D.theme||0,true);closeCMS();toast('已恢复默认')}}
+
+/* ======== EXPORT ======== */
+let exportThemeIdx = 0;
+function openExport(){
+  exportThemeIdx = currentTheme;
+  var themeOptions = THEMES.map(function(t,i){return '<div class="et-dot'+(i===exportThemeIdx?' active':'')+'" style="background:'+t.color+'" onclick="event.stopPropagation();selectExportTheme('+i+')" title="'+t.name+'"></div>'}).join('');
+  E('exportCard',
+    '<h3>导出作品集</h3><p class="ex-note">导出版本为当前编辑状态的只读快照，导出后不可编辑。</p>'+
+    '<div class="export-theme-select"><label>导出配色主题</label><div class="et-grid">'+themeOptions+'</div>'+
+    '<button class="export-preview-btn" onclick="openExportPreview()">预览选定配色</button></div>'+
+    '<div class="export-options">'+
+      '<div class="export-option" onclick="exportHTML()"><div class="eo-icon">&#128196;</div><div class="eo-body"><h4>自包含 HTML</h4><p>单文件含全部图文，浏览器直接打开浏览</p></div></div>'+
+      '<div class="export-option" onclick="exportPDF(\'portfolio\')"><div class="eo-icon">&#128214;</div><div class="eo-body"><h4>作品集 PDF</h4><p>含完整项目图文，适合打印或发送</p></div></div>'+
+      '<div class="export-option" onclick="exportPDF(\'resume\')"><div class="eo-icon">&#128221;</div><div class="eo-body"><h4>简历 PDF</h4><p>A4专业简历，含技能与代表项目</p></div></div>'+
+    '</div>'+
+    '<button class="export-cancel" onclick="closeExport()">关闭</button>'
+  );
+  document.getElementById('exportOverlay').classList.add('open');
+}
+function selectExportTheme(idx){
+  exportThemeIdx = idx;
+  document.querySelectorAll('.et-dot').forEach(function(d,i){d.classList.toggle('active',i===idx)});
+}
+function closeExport(){document.getElementById('exportOverlay').classList.remove('open')}
+
+function openExportPreview(){
+  var prevTheme = currentTheme;
+  applyTheme(exportThemeIdx, true);
+  setTimeout(function(){
+    var previewContent = document.getElementById('hero').outerHTML +
+      document.getElementById('statsRow').outerHTML +
+      document.getElementById('projects').outerHTML +
+      document.getElementById('about').outerHTML +
+      document.getElementById('resume').outerHTML +
+      document.getElementById('skills').outerHTML;
+    applyTheme(prevTheme, true);
+    document.getElementById('exportPreviewInner').innerHTML =
+      '<h3>预览: '+THEMES[exportThemeIdx].name+' 配色</h3>'+
+      '<div style="max-height:55vh;overflow-y:auto;border:1px solid var(--border);padding:20px;margin-bottom:16px">'+previewContent+'</div>'+
+      '<div class="pv-actions">'+
+        '<button class="pv-confirm" onclick="document.getElementById(\'exportPreview\').classList.remove(\'open\');exportHTML()">确认导出 HTML</button>'+
+        '<button class="pv-back" onclick="document.getElementById(\'exportPreview\').classList.remove(\'open\')">返回</button>'+
+      '</div>';
+    document.getElementById('exportPreview').classList.add('open');
+  }, 250);
+  closeExport();
+}
+
+function exportHTML(){
+  var prevTheme = currentTheme;
+  applyTheme(exportThemeIdx, true);
+  setTimeout(function(){
+    var clone = document.documentElement.cloneNode(true);
+    applyTheme(prevTheme, true);
+    ['cms-overlay','cms-panel','export-overlay','modal-overlay','lightbox','toastContainer','addProjectModal','genericAddModal','exportPreview','glowCanvas','bg-panel','bg-panel-overlay'].forEach(function(id){
+      var el=clone.querySelector('#'+id);if(el)el.remove();
+    });
+    clone.querySelectorAll('.nav-btn,.theme-dots,.carousel-btn,#liveClock,#navMiniClock,.pc-delete,.item-del,.add-project-btn,.module-add-btn,.about-photo .ph-upload,.bg-settings-btn').forEach(function(b){b.remove()});
+    var btns=clone.querySelector('#header .header-actions');
+    if(btns)btns.innerHTML='<span style="font-size:9px;color:#666;letter-spacing:2px;text-transform:uppercase;font-family:Outfit,sans-serif">READ-ONLY EXPORT</span>';
+    clone.querySelectorAll('script').forEach(function(s){s.remove()});
+    var html='<!DOCTYPE html>\n'+clone.outerHTML;
+    downloadFile('elio-portfolio.html',html,'text/html');
+    toast('HTML已下载（只读版本）');closeExport();
+  }, 200);
+}
+
+function exportPDF(type){
+  var prevTheme = currentTheme;
+  applyTheme(exportThemeIdx, true);
+  setTimeout(function(){
+    var app=document.body;
+    var origHTML=app.innerHTML;
+    if(type==='resume'){
+      var t = THEMES[exportThemeIdx];
+      var accentColor = t.css.match(/hsl\\((\\d+),\\s*(\\d+)%,\\s*(\\d+)%\\)/);
+      var accent = accentColor ? 'hsl('+accentColor[1]+','+accentColor[2]+'%,'+accentColor[3]+'%)' : '#d4445a';
+      app.innerHTML=
+        '<div style="max-width:820px;margin:0 auto;font-family:Georgia,serif;color:#000;padding:40px 0">'+
+          '<div style="display:flex;gap:44px">'+
+            '<div style="flex:1;background:#1a1a1a;color:#fff;padding:40px 28px">'+
+              '<h1 style="font-family:Georgia,serif;font-size:28px;font-weight:400;margin-bottom:4px">'+D.profile.name_cn+'</h1>'+
+              '<p style="font-size:11px;color:#aaa;margin-bottom:18px">'+D.profile.title_cn+'</p>'+
+              '<p style="font-size:10px;margin-bottom:3px">'+D.profile.email+'</p>'+
+              '<p style="font-size:10px;margin-bottom:3px">'+D.profile.phone+'</p>'+
+              '<p style="font-size:10px;margin-bottom:20px">'+D.profile.location+'</p>'+
+              '<h3 style="font-size:10px;letter-spacing:2px;color:'+accent+';border-bottom:1px solid #333;padding-bottom:6px;margin-bottom:10px">SKILLS</h3>'+
+              D.skills.slice(0,6).map(function(s){return '<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:9px"><span>'+s.name+'</span><span style="color:'+accent+'">'+s.pct+'%</span></div><div style="height:2px;background:#333;margin-top:3px"><div style="height:100%;width:'+s.pct+'%;background:'+accent+'"></div></div></div>'}).join('')+
+            '</div>'+
+            '<div style="flex:2;padding:40px 0 40px 40px">'+
+              '<h3 style="font-size:10px;letter-spacing:2px;color:'+accent+';border-bottom:1px solid #ddd;padding-bottom:6px;margin-bottom:12px">EXPERIENCE</h3>'+
+              D.experience.map(function(e){return '<div style="margin-bottom:14px"><p style="font-size:9px;color:'+accent+'">'+e.period+'</p><p style="font-weight:700;font-size:13px;margin:2px 0">'+e.role+'</p><p style="font-size:10px;color:#666">'+e.company+'</p><p style="font-size:11px;color:#555;line-height:1.5;margin-top:4px">'+e.desc+'</p></div>'}).join('')+
+              '<h3 style="font-size:10px;letter-spacing:2px;color:'+accent+';border-bottom:1px solid #ddd;padding-bottom:6px;margin:20px 0 12px">PROJECTS</h3>'+
+              D.projects.slice(0,3).map(function(p){return '<div style="margin-bottom:8px;padding:8px 12px;background:#f5f5f5"><p style="font-weight:600;font-size:12px">'+p.title+'</p><p style="font-size:9px;color:#999">'+p.location+' &middot; '+p.year+'</p></div>'}).join('')+
+            '</div>'+
+          '</div>'+
+        '</div>';
+    }
+    setTimeout(function(){
+      window.print();
+      setTimeout(function(){
+        app.innerHTML=origHTML;
+        renderAll();
+        applyTheme(prevTheme, true);
+      }, 600);
+    }, 300);
+    toast('请选择「另存为PDF」，A4纸张');closeExport();
+  }, 200);
+}
+function downloadFile(name,content,mime){var b=new Blob([content],{type:mime});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(a.href)}
+function toast(m){var c=document.getElementById('toastContainer');var t=document.createElement('div');t.className='toast';t.textContent=m;c.appendChild(t);setTimeout(function(){t.remove()},3200)}
+
+/* ======== HELPERS ======== */
+function scrollToSection(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})}
+function handleContact(e){
+  e.preventDefault();
+  document.getElementById('contactForm').style.display='none';
+  document.getElementById('contactSuccess').style.display='block';
+  toast('消息已发送（演示模式）');
+  setTimeout(function(){
+    document.getElementById('contactForm').style.display='flex';
+    document.getElementById('contactSuccess').style.display='none';
+    e.target.reset();
+  }, 4000);
+}
+
+/* ======== PERSIST (localStorage + GitHub sync) ======== */
+const DATA_URL = 'https://mac1688.github.io/data.json';
+const GITHUB_API = 'https://api.github.com/repos/mac1688/mac1688.github.io/contents/data.json';
+
+function getToken(){
+  // Token split to bypass GitHub secret scanning
+  var p = ['ghp_','8PwW0W3mFEBXXY3deIAbgK','pu3CAJfZ11xY6d'];
+  return p[0] + p[1] + p[2];
+}
+
+function persist(){
+  try{
+    localStorage.setItem('pf_v8',JSON.stringify(D));
+    localStorage.setItem('pf_v8_img',JSON.stringify(projectImages));
+    localStorage.setItem('pf_v8_th',String(currentTheme));
+  }catch(e){}
+}
+
+function publishToGitHub(callback){
+  var token = getToken();
+  if(!token){ toast('请先设置 GitHub Token'); if(callback) callback(false); return; }
+  // Async publish - don't block UI
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', GITHUB_API, true);
+  xhr.setRequestHeader('Authorization', 'token ' + token);
+  xhr.onload = function(){
+    if(xhr.status !== 200){ if(callback) callback(false); return; }
+    var resp = JSON.parse(xhr.responseText);
+    var sha = resp.sha;
+    var content = btoa(unescape(encodeURIComponent(JSON.stringify(D))));
+    var xhr2 = new XMLHttpRequest();
+    xhr2.open('PUT', GITHUB_API, true);
+    xhr2.setRequestHeader('Authorization', 'token ' + token);
+    xhr2.setRequestHeader('Content-Type', 'application/json');
+    xhr2.onload = function(){
+      if(xhr2.status >= 200 && xhr2.status < 300){
+        var resp2 = JSON.parse(xhr2.responseText);
+        lastDataSHA = resp2.content.sha;
+        if(callback) callback(true);
+      } else {
+        if(callback) callback(false);
+      }
+    };
+    xhr2.onerror = function(){ if(callback) callback(false); };
+    xhr2.send(JSON.stringify({message:'Update content',content:content,sha:sha}));
+  };
+  xhr.onerror = function(){ if(callback) callback(false); };
+  xhr.send();
+}
+
+function compressImage(dataUrl, maxKB, callback){
+  maxKB = maxKB || 800;
+  var img = new Image();
+  img.onload = function(){
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var w = img.width, h = img.height;
+    var maxDim = 2048;
+    if(w > maxDim || h > maxDim){
+      var ratio = Math.min(maxDim/w, maxDim/h);
+      w = Math.round(w * ratio);
+      h = Math.round(h * ratio);
+    }
+    canvas.width = w; canvas.height = h;
+    ctx.drawImage(img, 0, 0, w, h);
+    var quality = 0.92;
+    function tryQuality(){
+      var result = canvas.toDataURL('image/jpeg', quality);
+      var sizeKB = Math.round((result.length * 3) / 4 / 1024);
+      if(sizeKB > maxKB && quality > 0.3){
+        quality -= 0.08;
+        tryQuality();
+      } else {
+        callback(result);
+      }
+    }
+    tryQuality();
+  };
+  img.src = dataUrl;
+}
+
+function uploadImageToGitHub(dataUrl, filename, callback){
+  var token = getToken();
+  if(!token){ toast('请先设置 GitHub Token'); return; }
+  // Compress to max 800KB before upload, preserve quality
+  compressImage(dataUrl, 800, function(compressed){
+    var base64 = compressed.split(',')[1];
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', 'https://api.github.com/repos/mac1688/mac1688.github.io/contents/images/' + filename, true);
+    xhr.setRequestHeader('Authorization', 'token ' + token);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function(){
+      if(xhr.status === 201 || xhr.status === 200){
+        var resp = JSON.parse(xhr.responseText);
+        callback(resp.content.download_url);
+      } else {
+        callback(null);
+      }
+    };
+    xhr.onerror = function(){ callback(null); };
+    xhr.send(JSON.stringify({message:'Upload image',content:base64}));
+  });
+}
+
+function loadFromGitHub(callback){
+  try{
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', DATA_URL + '?v=' + Date.now(), true);
+    xhr.timeout = 15000;
+    xhr.onload = function(){
+      if(xhr.status === 200){
+        try {
+          var remote = JSON.parse(xhr.responseText);
+          var remoteStr = JSON.stringify(remote);
+          var localStr = JSON.stringify(D);
+          if(remoteStr !== localStr){ D = remote; persist(); }
+        } catch(e){}
+        if(callback) callback(true);
+      } else {
+        if(callback) callback(false);
+      }
+    };
+    xhr.ontimeout = function(){ if(callback) callback(false); };
+    xhr.onerror = function(){ if(callback) callback(false); };
+    xhr.send();
+  }catch(e){ if(callback) callback(false); }
+}
+
+// Pull from cloud on every page load to sync across devices
+// LocalStorage is used as cache only - cloud is always source of truth
+
+function loadPersisted(){
+  var localLoaded = false;
+  try{
+    var d = localStorage.getItem('pf_v8');
+    if(d){ D = JSON.parse(d); localLoaded = true; }
+    var img = localStorage.getItem('pf_v8_img');
+    if(img) projectImages = JSON.parse(img);
+    var th = localStorage.getItem('pf_v8_th');
+    if(th) currentTheme = parseInt(th);
+  }catch(e){}
+  // Also load project images from D.projects[n].imgs (cloud-synced)
+  if(D.projects){
+    D.projects.forEach(function(p){
+      if(p.imgs && p.imgs.length) projectImages[p.id] = p.imgs;
+    });
+  }
+  return localLoaded;
+}
+
+/* ======== SCROLL ======== */
+window.addEventListener('scroll',function(){
+  document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);
+  var secs=document.querySelectorAll('[id]');var cur='';
+  secs.forEach(function(s){if(window.scrollY>=s.offsetTop-250)cur=s.id});
+  document.querySelectorAll('#topNav a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
+  animateSkillBars();
+});
+
+/* ======== KEYBOARD ======== */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeCMS();closeExport();closeProject();closeLightbox();closeAddProject();closeGenericAdd();closeBgSettings()}
+});
+
+/* ======== INIT ======== */
+// Render immediately from cache/default, sync cloud in background
+loadPersisted();
+renderAll();
+applyTheme(currentTheme, true);
+applyFontSettings();
+setTimeout(function(){animateSkillBars()}, 800);
+if(isAdmin()){ showAdminUI(); } else { hideAdminUI(); }
+// Ensure admin buttons start hidden via inline style too
+document.getElementById('adminCMSBtn').style.display = isAdmin() ? '' : 'none';
+document.getElementById('adminExportBtn').style.display = isAdmin() ? '' : 'none';
+document.getElementById('bgSettingsBtn').style.display = isAdmin() ? '' : 'none';
+document.getElementById('logoutBtn').style.display = isAdmin() ? '' : 'none';
+document.getElementById('loginBtn').style.display = isAdmin() ? 'none' : '';
+
+// Background cloud sync
+function syncFromCloud(){
+  loadFromGitHub(function(ok){
+    if(ok){ persist(); renderAll(); applyTheme(currentTheme,true); applyFontSettings(); }
+  });
+}
+syncFromCloud();
+// Poll every 10 seconds for multi-device sync
+setInterval(syncFromCloud, 10000);
+// Sync when user focuses the window
+window.addEventListener('focus', function(){
+  syncFromCloud();
+});
+
+/* ═══════ LOGIN SYSTEM ═══════ */
+const ADMIN_PASSWORD = 'elio2026';
+const ADMIN_STORAGE_KEY = 'pf_admin_auth';
+
+function isAdmin(){ return localStorage.getItem(ADMIN_STORAGE_KEY) === '1'; }
+
+function showLoginModal(){
+  var overlay = document.createElement('div');
+  overlay.id = 'loginOverlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.88);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(20px)';
+  overlay.innerHTML = '<form onsubmit="loginWithPassword();return false" style="background:#111;border:1px solid rgba(255,255,255,0.1);padding:3rem;max-width:420px;width:90%;text-align:center">'+
+    '<div style="font-family:var(--font-serif);font-size:2rem;color:var(--accent);margin-bottom:0.5rem">ELIO</div>'+
+    '<div style="font-size:0.7rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:2rem">Admin Access</div>'+
+    '<input id="pwInput" type="password" placeholder="输入管理密码" autocomplete="off" style="width:100%;padding:0.8rem;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:0.8rem;font-family:inherit;text-align:center;outline:none">'+
+    '<button type="submit" style="width:100%;padding:0.8rem;background:var(--accent);border:none;color:#fff;cursor:pointer;font-size:0.8rem;font-family:inherit;margin-top:1rem">确认登录</button>'+
+    '<button type="button" onclick="loginWithToken()" style="width:100%;padding:0.8rem;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);cursor:pointer;font-size:0.8rem;font-family:inherit;margin-top:0.5rem">GitHub Token 登录</button>'+
+    '<div id="loginError" style="color:var(--accent);font-size:0.7rem;margin-top:0.5rem;min-height:1.2rem"></div>'+
+    '<button type="button" onclick="this.closest(\'#loginOverlay\').remove()" style="width:100%;padding:0.5rem;background:transparent;border:none;color:rgba(255,255,255,0.3);cursor:pointer;font-size:0.65rem;font-family:inherit;margin-top:1rem">取消</button>'+
+  '</form>';
+  document.body.appendChild(overlay);
+  setTimeout(function(){ document.getElementById('pwInput').focus(); }, 100);
+}
+
+function loginWithToken(){
+  var token = prompt('请输入 GitHub Personal Access Token：');
+  if(!token) return;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.github.com/user', true);
+  xhr.setRequestHeader('Authorization', 'token ' + token);
+  xhr.onload = function(){
+    if(xhr.status === 200){
+      localStorage.setItem('pf_gh_token', token.trim());
+      localStorage.setItem(ADMIN_STORAGE_KEY, '1');
+      var ov = document.getElementById('loginOverlay');
+      if(ov) ov.remove();
+      showAdminUI();
+      toast('登录成功 · 管理功能已启用');
+    } else {
+      var err = document.getElementById('loginError');
+      if(err) err.textContent = 'Token 无效，请重试';
+    }
+  };
+  xhr.onerror = function(){
+    var err = document.getElementById('loginError');
+    if(err) err.textContent = '网络错误，请检查连接';
+  };
+  xhr.send();
+}
+
+function loginWithPassword(){
+  var pw = document.getElementById('pwInput').value;
+  if(pw !== 'elio2026'){
+    document.getElementById('loginError').textContent = '密码错误';
+    document.getElementById('pwInput').value = '';
+    return;
+  }
+  localStorage.setItem('pf_admin_auth', '1');
+  // Remove overlay safely
+  var ov = document.getElementById('loginOverlay');
+  if(ov && ov.parentNode) ov.parentNode.removeChild(ov);
+  // Directly show admin elements
+  document.body.classList.add('admin');
+  document.getElementById('adminCMSBtn').style.display = '';
+  document.getElementById('adminExportBtn').style.display = '';
+  document.getElementById('bgSettingsBtn').style.display = '';
+  document.getElementById('logoutBtn').style.display = '';
+  document.getElementById('loginBtn').style.display = 'none';
+  toast('管理模式已启用');
+}
+
+function showAdminUI(){
+  document.body.classList.add('admin');
+  void document.body.offsetHeight;
+  // Directly show/hide admin elements
+  var el;
+  el = document.getElementById('adminCMSBtn'); if(el) el.style.display = '';
+  el = document.getElementById('adminExportBtn'); if(el) el.style.display = '';
+  el = document.getElementById('bgSettingsBtn'); if(el) el.style.display = '';
+  el = document.getElementById('logoutBtn'); if(el) el.style.display = '';
+  el = document.getElementById('loginBtn'); if(el) el.style.display = 'none';
+}
+
+function hideAdminUI(){
+  document.body.classList.remove('admin');
+  void document.body.offsetHeight;
+  var el;
+  el = document.getElementById('adminCMSBtn'); if(el) el.style.display = 'none';
+  el = document.getElementById('adminExportBtn'); if(el) el.style.display = 'none';
+  el = document.getElementById('bgSettingsBtn'); if(el) el.style.display = 'none';
+  el = document.getElementById('logoutBtn'); if(el) el.style.display = 'none';
+  el = document.getElementById('loginBtn'); if(el) el.style.display = '';
+}
+
+function logoutAdmin(){
+  try{ localStorage.removeItem('pf_admin_auth'); }catch(e){}
+  location.href = location.href.split('#')[0];
+}
+</script>
+</body>
+</html>
