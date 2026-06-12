@@ -1703,8 +1703,19 @@ function closeCMS(){var p=document.getElementById('cmsPanel');var o=document.get
 function saveAllCMS(){
   document.querySelectorAll('[data-cms]').forEach(function(el){set(el.dataset.cms,el.value)});
   renderAll(); persist(); closeCMS();
-  publishToGitHub(function(ok){
-    toast(ok ? '已保存并同步到云端' : '已本地保存（云端同步失败）');
+  // Always sync from cloud first, then push to avoid race conditions
+  toast('正在同步到云端...');
+  loadFromGitHub(function(ok){
+    // Re-read CMS fields after cloud sync to merge
+    document.querySelectorAll('[data-cms]').forEach(function(el){set(el.dataset.cms,el.value)});
+    publishToGitHub(function(pubOk){
+      if(pubOk){
+        _cloudSynced = true;
+        toast('已保存并同步到云端');
+      } else {
+        toast('云端同步失败，已保存到本地。请稍后重试。');
+      }
+    });
   });
 }
 function resetAll(){if(confirm('确定恢复默认内容？所有自定义修改将丢失。')){D=JSON.parse(JSON.stringify(defaultData));projectImages={};localStorage.clear();renderAll();applyTheme(D.theme||0,true);closeCMS();toast('已恢复默认')}}
@@ -2034,32 +2045,40 @@ document.addEventListener('keydown',function(e){
 });
 
 /* ======== INIT ======== */
-// Render immediately from cache/default, sync cloud in background
-loadPersisted();
-renderAll();
-applyTheme(currentTheme, true);
-applyFontSettings();
-setTimeout(function(){animateSkillBars()}, 800);
-if(isAdmin()){ showAdminUI(); } else { hideAdminUI(); }
-// Ensure admin buttons start hidden via inline style too
-document.getElementById('adminCMSBtn').style.display = isAdmin() ? '' : 'none';
-document.getElementById('adminExportBtn').style.display = isAdmin() ? '' : 'none';
-document.getElementById('bgSettingsBtn').style.display = isAdmin() ? '' : 'none';
-document.getElementById('logoutBtn').style.display = isAdmin() ? '' : 'none';
-document.getElementById('loginBtn').style.display = isAdmin() ? 'none' : '';
-
-// Background cloud sync
-function syncFromCloud(){
-  loadFromGitHub(function(ok){
-    if(ok){ persist(); renderAll(); applyTheme(currentTheme,true); applyFontSettings(); }
-  });
+// Cloud-first init: load from GitHub first, fallback to localStorage
+var _cloudSynced = false;
+function initialRender(){
+  renderAll();
+  applyTheme(currentTheme, true);
+  applyFontSettings();
+  setTimeout(function(){animateSkillBars()}, 800);
+  if(isAdmin()){ showAdminUI(); } else { hideAdminUI(); }
+  document.getElementById('adminCMSBtn').style.display = isAdmin() ? '' : 'none';
+  document.getElementById('adminExportBtn').style.display = isAdmin() ? '' : 'none';
+  document.getElementById('bgSettingsBtn').style.display = isAdmin() ? '' : 'none';
+  document.getElementById('logoutBtn').style.display = isAdmin() ? '' : 'none';
+  document.getElementById('loginBtn').style.display = isAdmin() ? 'none' : '';
 }
-syncFromCloud();
-// Poll every 10 seconds for multi-device sync
-setInterval(syncFromCloud, 10000);
-// Sync when user focuses the window
-window.addEventListener('focus', function(){
-  syncFromCloud();
+
+// Step 1: Load cloud data first
+loadFromGitHub(function(cloudOk){
+  if(cloudOk){
+    _cloudSynced = true;
+    persist();
+  } else {
+    // Fallback to localStorage
+    loadPersisted();
+  }
+  initialRender();
+  
+  // Step 2: Start periodic sync
+  function syncFromCloud(){
+    loadFromGitHub(function(ok){
+      if(ok){ _cloudSynced = true; persist(); renderAll(); applyTheme(currentTheme,true); applyFontSettings(); }
+    });
+  }
+  setInterval(syncFromCloud, 10000);
+  window.addEventListener('focus', syncFromCloud);
 });
 
 /* ═══════ LOGIN SYSTEM ═══════ */
