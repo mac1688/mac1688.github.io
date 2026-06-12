@@ -825,7 +825,7 @@ function renderNav(){
 
 /* ======== LOGO ======== */
 function renderLogo(){
-  const lt = D.profile.logo_text || 'ELIO';
+  const lt = D.profile.logo_text || '王雪松';
   const parts = lt.split(' ');
   const ls = D.profile.logo_subtitle || '';
   const el = document.getElementById('logoText');
@@ -903,7 +903,7 @@ function renderHero(){
 }
 
 function renderFooter(){
-  E('footer', '<p class="copy">'+(D.footer_copyright||'ELIO Design Studio. All rights reserved.')+'</p>');
+  E('footer', '<p class="copy">'+(D.footer_copyright||'© 2026 王雪松 WANG XUESONG. All Rights Reserved.')+'</p>');
 }
 
 function renderStats(){
@@ -2104,7 +2104,7 @@ function showLoginModal(){
   overlay.id = 'loginOverlay';
   overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.88);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(20px)';
   overlay.innerHTML = '<form onsubmit="loginWithPassword();return false" style="background:#111;border:1px solid rgba(255,255,255,0.1);padding:3rem;max-width:420px;width:90%;text-align:center">'+
-    '<div style="font-family:var(--font-serif);font-size:2rem;color:var(--accent);margin-bottom:0.5rem">ELIO</div>'+
+    '<div style="font-family:var(--font-serif);font-size:2rem;color:var(--accent);margin-bottom:0.5rem">王雪松</div>'+
     '<div style="font-size:0.7rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:2rem">Admin Access</div>'+
     '<input id="pwInput" type="password" placeholder="输入管理密码" autocomplete="off" style="width:100%;padding:0.8rem;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:0.8rem;font-family:inherit;text-align:center;outline:none">'+
     '<button type="submit" style="width:100%;padding:0.8rem;background:var(--accent);border:none;color:#fff;cursor:pointer;font-size:0.8rem;font-family:inherit;margin-top:1rem">确认登录</button>'+
