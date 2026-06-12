@@ -933,7 +933,7 @@ function renderProjects(){
   E('projects',
     '<div class="section-eyebrow">SELECTED WORKS</div>'+
     '<h2 class="section-title">精选项目</h2>'+
-    '<p class="section-sub">200+商业空间项目施工图深化，涵盖酒店、办公、商业零售及文化空间。</p>'+
+    '<p class="section-sub">'+(D.profile.tagline || '')+'</p>'+
     '<div class="projects-grid">'+projGrid+'<div class="add-project-btn" onclick="openAddProject()"><div class="plus">+</div><span>添加项目</span></div></div>'
   );
 }
@@ -2045,8 +2045,42 @@ document.addEventListener('keydown',function(e){
 });
 
 /* ======== INIT ======== */
-// Cloud-first init: load from GitHub first, fallback to localStorage
+// Render immediately from cache/default, sync cloud in background
 var _cloudSynced = false;
+loadPersisted();
+initialRender();
+
+// Sync from cloud as soon as possible, with debounce
+var _syncTimer = null;
+function syncFromCloud(){
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(function(){
+    loadFromGitHub(function(ok){
+      if(ok && !_cloudSynced){
+        _cloudSynced = true;
+        persist();
+        renderAll();
+        applyTheme(currentTheme, true);
+        applyFontSettings();
+      }
+    });
+  }, 500);
+}
+syncFromCloud();
+
+// Poll every 15 seconds for multi-device sync
+setInterval(function(){
+  loadFromGitHub(function(ok){
+    if(ok){ _cloudSynced = true; persist(); renderAll(); applyTheme(currentTheme,true); applyFontSettings(); }
+  });
+}, 15000);
+
+// Sync when user focuses the window
+window.addEventListener('focus', syncFromCloud);
+window.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'visible') syncFromCloud();
+});
+
 function initialRender(){
   renderAll();
   applyTheme(currentTheme, true);
@@ -2059,27 +2093,6 @@ function initialRender(){
   document.getElementById('logoutBtn').style.display = isAdmin() ? '' : 'none';
   document.getElementById('loginBtn').style.display = isAdmin() ? 'none' : '';
 }
-
-// Step 1: Load cloud data first
-loadFromGitHub(function(cloudOk){
-  if(cloudOk){
-    _cloudSynced = true;
-    persist();
-  } else {
-    // Fallback to localStorage
-    loadPersisted();
-  }
-  initialRender();
-  
-  // Step 2: Start periodic sync
-  function syncFromCloud(){
-    loadFromGitHub(function(ok){
-      if(ok){ _cloudSynced = true; persist(); renderAll(); applyTheme(currentTheme,true); applyFontSettings(); }
-    });
-  }
-  setInterval(syncFromCloud, 10000);
-  window.addEventListener('focus', syncFromCloud);
-});
 
 /* ═══════ LOGIN SYSTEM ═══════ */
 const ADMIN_PASSWORD = 'elio2026';
